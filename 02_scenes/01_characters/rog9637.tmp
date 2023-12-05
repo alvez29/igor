@@ -67,7 +67,7 @@ libraries = {
 [node name="body_collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lcln0")
 
-[node name="hit_area" type="Area2D" parent="." groups=["enemy"]]
+[node name="hit_area" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 5
 

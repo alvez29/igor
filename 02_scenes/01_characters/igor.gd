@@ -10,7 +10,7 @@ var new_anim
 var can_shoot = true
 @export var movement_speed:int = 500
 @export var shooting_speed:int = 600
-@export var projectile_speed:int = 7
+@export var projectile_speed:int = 10
 @export var damage:float = 10
 @export var health:float = 100
 
