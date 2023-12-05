@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyi0aha1wibwy"]
+
+[ext_resource type="Script" path="res://02_scenes/03_levels/main_level.gd" id="1_prhoq"]
+[ext_resource type="Texture2D" uid="uid://bcvlqn1ubh1hy" path="res://01_assets/01_sprites/background.png" id="2_rr446"]
+[ext_resource type="PackedScene" uid="uid://ct8ndnc45vn0m" path="res://02_scenes/01_characters/rogi.tscn" id="3_62a7f"]
+[ext_resource type="PackedScene" uid="uid://cn0mc11h82aqa" path="res://02_scenes/01_characters/igor.tscn" id="4_pjrcx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_osgfe"]
+size = Vector2(998.5, 20)
+
+[node name="main_level" type="Node2D"]
+script = ExtResource("1_prhoq")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(1080, 1080)
+texture = ExtResource("2_rr446")
+
+[node name="rogi_2" parent="." node_paths=PackedStringArray("igor_reference") instance=ExtResource("3_62a7f")]
+position = Vector2(566, 544)
+igor_reference = NodePath("../igor")
+
+[node name="rogi" parent="." node_paths=PackedStringArray("igor_reference") instance=ExtResource("3_62a7f")]
+position = Vector2(1478, 785)
+igor_reference = NodePath("../igor")
+
+[node name="igor" parent="." instance=ExtResource("4_pjrcx")]
+position = Vector2(279, 118)
+
+[node name="wall" type="StaticBody2D" parent="."]
+position = Vector2(7, 5)
+scale = Vector2(0.996469, 0.994579)
+collision_layer = 8
+collision_mask = 0
+
+[node name="wall_collision" type="CollisionShape2D" parent="wall"]
+position = Vector2(131.464, 521.829)
+rotation = -0.965176
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision2" type="CollisionShape2D" parent="wall"]
+position = Vector2(20.0708, 775.202)
+rotation = -1.2023
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision3" type="CollisionShape2D" parent="wall"]
+position = Vector2(-12.0425, 950.151)
+rotation = -1.43154
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision4" type="CollisionShape2D" parent="wall"]
+position = Vector2(-18.0638, 1104.99)
+rotation = -1.61215
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision5" type="CollisionShape2D" parent="wall"]
+position = Vector2(34.1205, 1411.65)
+rotation = -1.91034
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision6" type="CollisionShape2D" parent="wall"]
+position = Vector2(198.702, 1733.4)
+rotation = -2.21792
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision7" type="CollisionShape2D" parent="wall"]
+position = Vector2(389.375, 1933.48)
+rotation = -2.44654
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision8" type="CollisionShape2D" parent="wall"]
+position = Vector2(728.572, 2125.52)
+rotation = -2.73951
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision9" type="CollisionShape2D" parent="wall"]
+position = Vector2(1015.59, 2180.82)
+rotation = -3.0038
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision10" type="CollisionShape2D" parent="wall"]
+position = Vector2(1227.33, 2171.77)
+rotation = -3.18968
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision11" type="CollisionShape2D" parent="wall"]
+position = Vector2(1462.16, 2115.47)
+rotation = -3.38798
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision12" type="CollisionShape2D" parent="wall"]
+position = Vector2(1595.63, 2048.1)
+rotation = -3.59725
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision13" type="CollisionShape2D" parent="wall"]
+position = Vector2(1756.2, 1942.53)
+rotation = -3.80435
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision14" type="CollisionShape2D" parent="wall"]
+position = Vector2(1913.76, 1790.71)
+rotation = -3.98132
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision15" type="CollisionShape2D" parent="wall"]
+position = Vector2(2043.21, 1601.68)
+rotation = -4.15733
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="spawn_enemies" type="Timer" parent="."]
+process_mode = 1
+
+[connection signal="timeout" from="spawn_enemies" to="." method="_on_spawn_enemies_timeout"]
