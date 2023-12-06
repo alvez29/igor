@@ -180,6 +180,5 @@ shape = SubResource("RectangleShape2D_osgfe")
 
 [node name="spawn_enemies" type="Timer" parent="."]
 process_mode = 1
-autostart = true
 
 [connection signal="timeout" from="spawn_enemies" to="." method="_on_spawn_enemies_timeout"]

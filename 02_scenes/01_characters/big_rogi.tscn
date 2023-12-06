@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://ct8ndnc45vn0m"]
+[gd_scene load_steps=8 format=3 uid="uid://nywggrxibqbg"]
 
-[ext_resource type="Texture2D" uid="uid://0fwlvk7qfa0k" path="res://01_assets/01_sprites/rogi_animation.png" id="1_br3bg"]
-[ext_resource type="Script" path="res://02_scenes/01_characters/rogi.gd" id="1_j6xww"]
+[ext_resource type="Script" path="res://02_scenes/01_characters/big_rogi.gd" id="1_5jbtl"]
+[ext_resource type="Texture2D" uid="uid://dwjxteoe5ffsq" path="res://01_assets/01_sprites/big_rogi_animation.png" id="2_7os3y"]
 
 [sub_resource type="Animation" id="Animation_tmvrw"]
 length = 0.9
@@ -43,20 +43,20 @@ _data = {
 "run": SubResource("Animation_skj8d")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lcln0"]
-radius = 27.0185
+[sub_resource type="CircleShape2D" id="CircleShape2D_fon3o"]
+radius = 56.8858
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7w4j7"]
-radius = 41.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_kvlff"]
+radius = 91.0824
 
-[node name="rogi" type="CharacterBody2D" groups=["enemy"]]
+[node name="big_rogi" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
-script = ExtResource("1_j6xww")
+script = ExtResource("1_5jbtl")
 
 [node name="image" type="Sprite2D" parent="."]
-texture = ExtResource("1_br3bg")
+texture = ExtResource("2_7os3y")
 hframes = 3
 
 [node name="animation" type="AnimationPlayer" parent="."]
@@ -65,20 +65,13 @@ libraries = {
 }
 
 [node name="body_collision" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_lcln0")
+shape = SubResource("CircleShape2D_fon3o")
 
 [node name="hit_area" type="Area2D" parent="." groups=["enemy"]]
 collision_layer = 2
 collision_mask = 5
 
 [node name="hit_collision" type="CollisionShape2D" parent="hit_area"]
-shape = SubResource("CircleShape2D_7w4j7")
-
-[node name="reload_timer" type="Timer" parent="."]
-process_callback = 0
-one_shot = true
-autostart = true
+shape = SubResource("CircleShape2D_kvlff")
 
 [connection signal="area_entered" from="hit_area" to="." method="_on_hit_area_area_entered"]
-[connection signal="body_entered" from="hit_area" to="." method="_on_hit_area_body_entered"]
-[connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]

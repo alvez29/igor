@@ -4,8 +4,11 @@ const INITIAL_ENEMY_HEALTH = 10
 const INITIAL_ENEMY_MOVEMENT_SPEED = 300
 
 var rogi_scene = preload("res://02_scenes/01_characters/rogi.tscn")
+var big_rogi_scene = preload("res://02_scenes/01_characters/big_rogi.tscn")
+var enemy_projectile_damage = 5
+var enemy_melee_damage = 2
 var enemy_health = 50
-var spawn_enemy_time = 0.36
+var spawn_enemy_time = 0.77
 
 func _ready():
 	initialize_igor()
@@ -15,29 +18,50 @@ func _ready():
 func _process(delta):
 	pass
 	
+func _on_end_game():
+	#TODO
+	pass
+
 func _on_enemy_hit(enemy_reference):
 	enemy_reference.take_damage($igor.damage)
-	
+
+# on enemy hit player with projectile
+func _on_player_shot():
+	$igor.take_damage(enemy_projectile_damage)
+
+# on enemy hit player with body
+func _on_player_hit():
+	$igor.take_damage(enemy_melee_damage)
+
 func _on_spawn_enemies_timeout():
 	spawn_enemy()
 
 func initialize_igor():
 	$igor.position = Vector2(1080, 1080)
+	$igor.connect("player_shot", _on_player_shot)
+	$igor.connect("player_hit", _on_player_hit)
+	$igor.connect("end_game", _on_end_game)
 	
 func set_up_timer():
 	$spawn_enemies.wait_time = spawn_enemy_time
-	$spawn_enemies.start()
 	
 func spawn_enemy():
 	var random_point = get_random_point()
-	print(random_point)
 	#TODO: Comprobar que no haya ninguna entidad cerca
-	var rogi_instance = rogi_scene.instantiate()
-	rogi_instance.initialize_rogi($igor, INITIAL_ENEMY_HEALTH, INITIAL_ENEMY_MOVEMENT_SPEED)
-	rogi_instance.position = random_point
-	rogi_instance.connect("enemy_hit", _on_enemy_hit)
-	add_child(rogi_instance)
+	var should_spawn_shooter = randi_range(0, 1)
 	
+	if should_spawn_shooter:
+		var rogi_instance = rogi_scene.instantiate()
+		rogi_instance.initialize_rogi($igor, INITIAL_ENEMY_HEALTH, INITIAL_ENEMY_MOVEMENT_SPEED)
+		rogi_instance.position = random_point
+		rogi_instance.connect("enemy_hit", _on_enemy_hit)
+		add_child(rogi_instance)
+	else:
+		var big_rogi_instance = big_rogi_scene.instantiate()
+		big_rogi_instance.initialize_rogi($igor, INITIAL_ENEMY_HEALTH, INITIAL_ENEMY_MOVEMENT_SPEED)
+		big_rogi_instance.position = random_point
+		big_rogi_instance.connect("enemy_hit", _on_enemy_hit)
+		add_child(big_rogi_instance)
 
 func get_random_point():
 	var radius = 1075

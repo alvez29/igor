@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://7edvuoc7hxkm"]
+
+[ext_resource type="Texture2D" uid="uid://d3022qvyaosje" path="res://01_assets/01_sprites/rogi_proj_animation.png" id="1_mspol"]
+[ext_resource type="Script" path="res://02_scenes/02_objects/rogi_projectile.gd" id="1_yxhw6"]
+
+[sub_resource type="Animation" id="Animation_74ndq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("image:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_klduv"]
+resource_name = "fly"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("image:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_enr5o"]
+_data = {
+"RESET": SubResource("Animation_74ndq"),
+"fly": SubResource("Animation_klduv")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eeel7"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u5okd"]
+radius = 11.0454
+
+[node name="rogi_projectile" type="RigidBody2D" groups=["enemy_projectile"]]
+collision_layer = 16
+gravity_scale = 0.0
+script = ExtResource("1_yxhw6")
+
+[node name="image" type="Sprite2D" parent="."]
+texture = ExtResource("1_mspol")
+hframes = 5
+
+[node name="animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_enr5o")
+}
+autoplay = "fly"
+
+[node name="body_collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eeel7")
+
+[node name="hit_area" type="Area2D" parent="." groups=["enemy_projectile"]]
+
+[node name="hit_collision" type="CollisionShape2D" parent="hit_area"]
+shape = SubResource("CircleShape2D_u5okd")
+
+[connection signal="area_entered" from="hit_area" to="." method="_on_hit_area_area_entered"]

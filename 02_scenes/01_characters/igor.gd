@@ -9,8 +9,8 @@ var anim
 var new_anim
 var can_shoot = true
 @export var movement_speed:int = 500
-@export var shooting_speed:int = 600
-@export var projectile_speed:int = 10
+@export var shooting_speed:int = 0.7
+@export var projectile_speed:float = 10
 @export var damage:float = 10
 @export var health:float = 100
 
@@ -19,8 +19,14 @@ var projectile_scene = preload("res://02_scenes/02_objects/projectile.tscn")
 @onready var screen_width = get_viewport_rect().size.x
 @onready var screen_heigth = get_viewport_rect().size.y
 
+signal player_shot
+signal player_hit
+signal end_game
+
 func _ready():
 	change_state(IDLE)
+	set_up_timer()
+	#TODO: hacer barra de vida
 
 func _physics_process(delta):
 	var motion = process_input(delta)
@@ -31,6 +37,19 @@ func _physics_process(delta):
 
 func _on_reload_timer_timeout():
 	can_shoot = true
+
+func _on_damage_timer_timeout():
+	player_hit.emit()
+
+func _on_hit_area_area_entered(area):
+	if area.is_in_group("enemy_projectile"):
+		player_shot.emit()
+	if area.is_in_group("enemy") and $enemy_damage_timer.is_stopped():
+		$enemy_damage_timer.start()
+
+func _on_hit_area_area_exited(area):
+	if area.is_in_group("enemy"):
+		$enemy_damage_timer.stop()
 
 func change_state(new_state):
 	state = new_state
@@ -74,17 +93,6 @@ func process_input(delta):
 	if right:
 		velocity.x = movement_speed
 		change_state(RUN)
-	
-	
-	# TODO: hacer el escenario redondo
-	if position.x > LEVEL_LIMIT:
-		position.x = LEVEL_LIMIT
-	if position.y > LEVEL_LIMIT:
-		position.y = LEVEL_LIMIT
-	if position.x < 0:
-		position.x = 0
-	if position.y < 0:
-		position.y = 0
 
 func shoot():
 	# TODO: calcular el enemigo más cerca puede ser un problema con muchos enemigos
@@ -96,8 +104,22 @@ func shoot():
 		projectile_instance.position = position
 		projectile_instance.initialize_to_closest_enemy(closest_enemy, projectile_speed)
 		stage_node.add_child(projectile_instance)
-		can_shoot = false
-		$reload_timer.start()
+	
+	can_shoot = false
+	$reload_timer.start()
+
+func set_up_timer():
+	$reload_timer.wait_time = shooting_speed
+
+# endregion
+
+# region public functions
+
+func take_damage(damage):
+	self.health -= damage
+	print("La vida de igor es:" + str(health))
+	if health <= 0:
+		end_game.emit()
 
 # endregion
 

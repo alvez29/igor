@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn0mc11h82aqa"]
+[gd_scene load_steps=8 format=3 uid="uid://cn0mc11h82aqa"]
 
 [ext_resource type="Script" path="res://02_scenes/01_characters/igor.gd" id="1_aevrl"]
 [ext_resource type="Texture2D" uid="uid://c4ry2n6xl5yrc" path="res://01_assets/01_sprites/igor_animation.png" id="2_7jn6h"]
@@ -43,11 +43,14 @@ _data = {
 "run": SubResource("Animation_skj8d")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8xieu"]
+radius = 34.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_amtl3"]
 radius = 28.0
 
 [node name="igor" type="CharacterBody2D" groups=["player"]]
-collision_mask = 10
+collision_mask = 26
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_aevrl")
@@ -62,12 +65,25 @@ libraries = {
 "": SubResource("AnimationLibrary_iljcn")
 }
 
+[node name="hit_area" type="Area2D" parent="." groups=["player"]]
+collision_mask = 3
+
+[node name="hit_collision" type="CollisionShape2D" parent="hit_area"]
+shape = SubResource("CircleShape2D_8xieu")
+
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_amtl3")
 
 [node name="reload_timer" type="Timer" parent="."]
-wait_time = 0.7
+one_shot = true
+autostart = true
+
+[node name="enemy_damage_timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="camera" type="Camera2D" parent="."]
 
+[connection signal="area_entered" from="hit_area" to="." method="_on_hit_area_area_entered"]
+[connection signal="area_exited" from="hit_area" to="." method="_on_hit_area_area_exited"]
 [connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="enemy_damage_timer" to="." method="_on_damage_timer_timeout"]
