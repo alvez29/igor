@@ -8,8 +8,8 @@ var enemy_shooting_speed = 1
 var enemy_projectile_damage = 5
 var enemy_melee_damage = 2
 
-var rogi_scene = preload("res://02_scenes/01_characters/rogi.tscn")
-var big_rogi_scene = preload("res://02_scenes/01_characters/big_rogi.tscn")
+var shooter_enemy_scene = preload("res://02_scenes/01_characters/shooter_enemy.tscn")
+var simple_enemy_scene = preload("res://02_scenes/01_characters/simple_enemy.tscn")
 
 var spawn_enemy_time = 0.77
 
@@ -53,17 +53,17 @@ func spawn_enemy():
 	var should_spawn_shooter = randi_range(0, 1)
 	
 	if should_spawn_shooter:
-		var rogi_instance = rogi_scene.instantiate()
-		rogi_instance.initialize_rogi($igor, enemy_health, enemy_movement_speed, enemy_shooting_speed, enemy_projectile_speed)
-		rogi_instance.position = random_point
-		rogi_instance.connect("enemy_hit", _on_enemy_hit)
-		add_child(rogi_instance)
+		var shooter_enemy_instance = shooter_enemy_scene.instantiate()
+		shooter_enemy_instance.initialize_shooter_enemy($igor, enemy_health, enemy_movement_speed, enemy_shooting_speed, enemy_projectile_speed)
+		shooter_enemy_instance.position = random_point
+		shooter_enemy_instance.connect("enemy_hit", _on_enemy_hit)
+		add_child(shooter_enemy_instance)
 	else:
-		var big_rogi_instance = big_rogi_scene.instantiate()
-		big_rogi_instance.initialize_big_rogi($igor, enemy_health, enemy_movement_speed)
-		big_rogi_instance.position = random_point
-		big_rogi_instance.connect("enemy_hit", _on_enemy_hit)
-		add_child(big_rogi_instance)
+		var simple_enemy_instance = simple_enemy_scene.instantiate()
+		simple_enemy_instance.initialize_simple_enemy($igor, enemy_health, enemy_movement_speed)
+		simple_enemy_instance.position = random_point
+		simple_enemy_instance.connect("enemy_hit", _on_enemy_hit)
+		add_child(simple_enemy_instance)
 
 func get_random_point():
 	var radius = 1075

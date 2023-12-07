@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxucjh0senwhw"]
+[gd_scene load_steps=8 format=3 uid="uid://cn0mc11h82aqa"]
 
-[ext_resource type="Texture2D" uid="uid://0fwlvk7qfa0k" path="res://01_assets/01_sprites/rogi_animation.png" id="1_br3bg"]
-[ext_resource type="Script" path="res://02_scenes/01_characters/shooter_enemy.gd" id="1_x4g7m"]
+[ext_resource type="Script" path="res://02_scenes/01_characters/igor.gd" id="1_aevrl"]
+[ext_resource type="Texture2D" uid="uid://c4ry2n6xl5yrc" path="res://01_assets/01_sprites/igor_animation.png" id="2_7jn6h"]
 
 [sub_resource type="Animation" id="Animation_tmvrw"]
 length = 0.9
@@ -43,20 +43,21 @@ _data = {
 "run": SubResource("Animation_skj8d")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lcln0"]
-radius = 27.0185
+[sub_resource type="CircleShape2D" id="CircleShape2D_8xieu"]
+radius = 34.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7w4j7"]
-radius = 41.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_amtl3"]
+radius = 28.0
 
-[node name="rogi" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 2
-collision_mask = 3
+[node name="igor" type="CharacterBody2D" groups=["player"]]
+collision_mask = 26
 motion_mode = 1
-script = ExtResource("1_x4g7m")
+wall_min_slide_angle = 0.0
+script = ExtResource("1_aevrl")
+metadata/_edit_vertical_guides_ = [1080.0, 1083.0, 64.0]
 
 [node name="image" type="Sprite2D" parent="."]
-texture = ExtResource("1_br3bg")
+texture = ExtResource("2_7jn6h")
 hframes = 3
 
 [node name="animation" type="AnimationPlayer" parent="."]
@@ -64,21 +65,24 @@ libraries = {
 "": SubResource("AnimationLibrary_iljcn")
 }
 
-[node name="body_collision" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_lcln0")
-
-[node name="hit_area" type="Area2D" parent="." groups=["enemy"]]
-collision_layer = 2
-collision_mask = 5
+[node name="hit_area" type="Area2D" parent="." groups=["player"]]
+collision_mask = 3
 
 [node name="hit_collision" type="CollisionShape2D" parent="hit_area"]
-shape = SubResource("CircleShape2D_7w4j7")
+shape = SubResource("CircleShape2D_8xieu")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_amtl3")
 
 [node name="reload_timer" type="Timer" parent="."]
-process_callback = 0
 one_shot = true
-autostart = true
+
+[node name="enemy_damage_timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="camera" type="Camera2D" parent="."]
 
 [connection signal="area_entered" from="hit_area" to="." method="_on_hit_area_area_entered"]
-[connection signal="body_entered" from="hit_area" to="." method="_on_hit_area_body_entered"]
+[connection signal="area_exited" from="hit_area" to="." method="_on_hit_area_area_exited"]
 [connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="enemy_damage_timer" to="." method="_on_damage_timer_timeout"]

@@ -1,4 +1,4 @@
-class_name Enemy extends CharacterBody2D
+class_name SimpleEnemy extends CharacterBody2D
 
 enum {RUN, HURT, DEAD}
 var state
@@ -59,3 +59,8 @@ func process_animation():
 
 func take_damage(damage):
 	change_state(HURT, damage)
+
+func initialize_simple_enemy(igor_reference, health, movement_speed):
+	self.igor_reference = igor_reference
+	self.health = health
+	self.movement_speed = movement_speed

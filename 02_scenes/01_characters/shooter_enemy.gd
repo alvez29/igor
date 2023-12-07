@@ -1,4 +1,4 @@
-class_name Rogi extends Enemy
+class_name ShooterEnemy extends SimpleEnemy
 
 var can_shoot = true
 var shooting_speed
@@ -35,7 +35,7 @@ func shoot():
 		can_shoot = false
 		$reload_timer.start()
 		
-func initialize_rogi(igor_reference, enemy_health, movement_speed, shooting_speed, projectile_speed):
+func initialize_shooter_enemy(igor_reference, enemy_health, movement_speed, shooting_speed, projectile_speed):
 	self.igor_reference = igor_reference
 	self.health = enemy_health
 	self.movement_speed = movement_speed

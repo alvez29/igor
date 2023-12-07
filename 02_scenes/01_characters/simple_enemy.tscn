@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://nywggrxibqbg"]
+[gd_scene load_steps=8 format=3 uid="uid://y1msbaheoo7i"]
 
-[ext_resource type="Script" path="res://02_scenes/01_characters/big_rogi.gd" id="1_5jbtl"]
-[ext_resource type="Texture2D" uid="uid://dwjxteoe5ffsq" path="res://01_assets/01_sprites/big_rogi_animation.png" id="2_7os3y"]
+[ext_resource type="Script" path="res://02_scenes/01_characters/simple_enemy.gd" id="1_prkd8"]
+[ext_resource type="Texture2D" uid="uid://dwjxteoe5ffsq" path="res://01_assets/01_sprites/big_rogi_animation.png" id="2_puq50"]
 
 [sub_resource type="Animation" id="Animation_tmvrw"]
 length = 0.9
@@ -44,19 +44,19 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fon3o"]
-radius = 56.8858
+radius = 63.0317
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kvlff"]
-radius = 91.0824
+radius = 88.0057
 
-[node name="big_rogi" type="CharacterBody2D" groups=["enemy"]]
+[node name="enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
-script = ExtResource("1_5jbtl")
+script = ExtResource("1_prkd8")
 
 [node name="image" type="Sprite2D" parent="."]
-texture = ExtResource("2_7os3y")
+texture = ExtResource("2_puq50")
 hframes = 3
 
 [node name="animation" type="AnimationPlayer" parent="."]

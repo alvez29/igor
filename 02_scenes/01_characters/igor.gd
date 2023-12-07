@@ -8,11 +8,13 @@ var state
 var anim
 var new_anim
 var can_shoot = true
-@export var movement_speed:int = 500
-@export var shooting_speed:int = 0.7
-@export var projectile_speed:float = 10
-@export var damage:float = 10
-@export var health:float = 100
+
+var movement_speed:int = 500
+var shooting_speed:float = 0.4
+var projectile_speed:float = 10
+var damage:float = 10
+var health:float = 100
+var max_health:float = 100
 
 var projectile_scene = preload("res://02_scenes/02_objects/projectile.tscn")
 
@@ -25,8 +27,8 @@ signal end_game
 
 func _ready():
 	change_state(IDLE)
-	set_up_timer()
-	#TODO: hacer barra de vida
+	#TODO: crear sistema de experiencia
+	update_health_bar()
 
 func _physics_process(delta):
 	var motion = process_input(delta)
@@ -34,6 +36,7 @@ func _physics_process(delta):
 	if can_shoot:
 		shoot()
 	process_animation()
+	update_health_bar()
 
 func _on_reload_timer_timeout():
 	can_shoot = true
@@ -107,10 +110,10 @@ func shoot():
 		stage_node.add_child(projectile_instance)
 	
 	can_shoot = false
+	
+	$reload_timer.wait_time = shooting_speed
 	$reload_timer.start()
 
-func set_up_timer():
-	$reload_timer.wait_time = shooting_speed
 
 # endregion
 
@@ -144,5 +147,9 @@ func process_animation():
 	if new_anim != anim:
 		anim = new_anim
 		$animation.play(anim)
+		
+func update_health_bar():
+	$health_bar.max_value = max_health
+	$health_bar.value = health
 
 # endregion

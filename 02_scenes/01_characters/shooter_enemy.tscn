@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://0xmep5pw07hj"]
+
+[ext_resource type="Script" path="res://02_scenes/01_characters/shooter_enemy.gd" id="1_astoj"]
+[ext_resource type="PackedScene" uid="uid://y1msbaheoo7i" path="res://02_scenes/01_characters/simple_enemy.tscn" id="1_kyx25"]
+[ext_resource type="Texture2D" uid="uid://0fwlvk7qfa0k" path="res://01_assets/01_sprites/rogi_animation.png" id="2_cr4w5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3853k"]
+radius = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hgd8j"]
+radius = 37.3363
+
+[node name="shooter_enemy" instance=ExtResource("1_kyx25")]
+script = ExtResource("1_astoj")
+
+[node name="image" parent="." index="0"]
+texture = ExtResource("2_cr4w5")
+
+[node name="body_collision" parent="." index="2"]
+shape = SubResource("CircleShape2D_3853k")
+
+[node name="hit_collision" parent="hit_area" index="0"]
+shape = SubResource("CircleShape2D_hgd8j")
+
+[node name="reload_timer" type="Timer" parent="." index="4"]
+process_callback = 0
+one_shot = true
+autostart = true
