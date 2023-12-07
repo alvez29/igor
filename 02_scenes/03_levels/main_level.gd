@@ -1,13 +1,16 @@
 extends Node2D
 
-const INITIAL_ENEMY_HEALTH = 10
-const INITIAL_ENEMY_MOVEMENT_SPEED = 300
+var enemy_health = 10
+var enemy_movement_speed = 300
+var enemy_projectile_speed = 10
+var enemy_shooting_speed = 1
+
+var enemy_projectile_damage = 5
+var enemy_melee_damage = 2
 
 var rogi_scene = preload("res://02_scenes/01_characters/rogi.tscn")
 var big_rogi_scene = preload("res://02_scenes/01_characters/big_rogi.tscn")
-var enemy_projectile_damage = 5
-var enemy_melee_damage = 2
-var enemy_health = 50
+
 var spawn_enemy_time = 0.77
 
 func _ready():
@@ -47,18 +50,17 @@ func set_up_timer():
 	
 func spawn_enemy():
 	var random_point = get_random_point()
-	#TODO: Comprobar que no haya ninguna entidad cerca
 	var should_spawn_shooter = randi_range(0, 1)
 	
 	if should_spawn_shooter:
 		var rogi_instance = rogi_scene.instantiate()
-		rogi_instance.initialize_rogi($igor, INITIAL_ENEMY_HEALTH, INITIAL_ENEMY_MOVEMENT_SPEED)
+		rogi_instance.initialize_rogi($igor, enemy_health, enemy_movement_speed, enemy_shooting_speed, enemy_projectile_speed)
 		rogi_instance.position = random_point
 		rogi_instance.connect("enemy_hit", _on_enemy_hit)
 		add_child(rogi_instance)
 	else:
 		var big_rogi_instance = big_rogi_scene.instantiate()
-		big_rogi_instance.initialize_rogi($igor, INITIAL_ENEMY_HEALTH, INITIAL_ENEMY_MOVEMENT_SPEED)
+		big_rogi_instance.initialize_big_rogi($igor, enemy_health, enemy_movement_speed)
 		big_rogi_instance.position = random_point
 		big_rogi_instance.connect("enemy_hit", _on_enemy_hit)
 		add_child(big_rogi_instance)
