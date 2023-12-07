@@ -45,6 +45,7 @@ func _on_hit_area_area_entered(area):
 	if area.is_in_group("enemy_projectile"):
 		player_shot.emit()
 	if area.is_in_group("enemy") and $enemy_damage_timer.is_stopped():
+		player_hit.emit()
 		$enemy_damage_timer.start()
 
 func _on_hit_area_area_exited(area):

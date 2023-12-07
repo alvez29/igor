@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bibc850xqb4vc"]
+
+[ext_resource type="Script" path="res://02_scenes/01_characters/base_enemy.gd" id="1_ld0mp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3nuod"]
+radius = 27.0185
+
+[node name="base_enemy" type="CharacterBody2D"]
+script = ExtResource("1_ld0mp")
+
+[node name="image" type="Sprite2D" parent="."]
+
+[node name="animation" type="AnimationPlayer" parent="."]
+
+[node name="body_collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3nuod")
+one_way_collision_margin = 17.5
