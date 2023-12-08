@@ -1,5 +1,6 @@
 extends Node2D
 
+#TODO: podría añadir un objeto que encapsulara los parámetros
 var enemy_health = 10
 var enemy_movement_speed = 300
 var enemy_projectile_speed = 10
@@ -25,24 +26,11 @@ func _on_end_game():
 	#TODO
 	pass
 
-func _on_enemy_hit(enemy_reference):
-	enemy_reference.take_damage($igor.damage)
-
-# on enemy hit player with projectile
-func _on_player_shot():
-	$igor.take_damage(enemy_projectile_damage)
-
-# on enemy hit player with body
-func _on_player_hit():
-	$igor.take_damage(enemy_melee_damage)
-
 func _on_spawn_enemies_timeout():
 	spawn_enemy()
 
 func initialize_igor():
 	$igor.position = Vector2(1080, 1080)
-	$igor.connect("player_shot", _on_player_shot)
-	$igor.connect("player_hit", _on_player_hit)
 	$igor.connect("end_game", _on_end_game)
 	
 func set_up_timer():
@@ -54,15 +42,13 @@ func spawn_enemy():
 	
 	if should_spawn_shooter:
 		var shooter_enemy_instance = shooter_enemy_scene.instantiate()
-		shooter_enemy_instance.initialize_shooter_enemy($igor, enemy_health, enemy_movement_speed, enemy_shooting_speed, enemy_projectile_speed)
+		shooter_enemy_instance.initialize_shooter_enemy($igor, enemy_health, enemy_movement_speed, enemy_melee_damage, enemy_projectile_damage, enemy_shooting_speed, enemy_projectile_speed)
 		shooter_enemy_instance.position = random_point
-		shooter_enemy_instance.connect("enemy_hit", _on_enemy_hit)
 		add_child(shooter_enemy_instance)
 	else:
 		var simple_enemy_instance = simple_enemy_scene.instantiate()
-		simple_enemy_instance.initialize_simple_enemy($igor, enemy_health, enemy_movement_speed)
+		simple_enemy_instance.initialize_simple_enemy($igor, enemy_health, enemy_movement_speed, enemy_melee_damage)
 		simple_enemy_instance.position = random_point
-		simple_enemy_instance.connect("enemy_hit", _on_enemy_hit)
 		add_child(simple_enemy_instance)
 
 func get_random_point():

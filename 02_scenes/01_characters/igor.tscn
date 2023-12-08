@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cn0mc11h82aqa"]
+[gd_scene load_steps=10 format=3 uid="uid://cn0mc11h82aqa"]
 
 [ext_resource type="Script" path="res://02_scenes/01_characters/igor.gd" id="1_aevrl"]
 [ext_resource type="Texture2D" uid="uid://c4ry2n6xl5yrc" path="res://01_assets/01_sprites/igor_animation.png" id="2_7jn6h"]
+[ext_resource type="Script" path="res://02_scenes/02_objects/enemy_damage_timer.gd" id="3_dvtra"]
 
 [sub_resource type="Animation" id="Animation_tmvrw"]
 length = 0.9
@@ -83,6 +84,7 @@ one_shot = true
 
 [node name="enemy_damage_timer" type="Timer" parent="."]
 wait_time = 0.5
+script = ExtResource("3_dvtra")
 
 [node name="camera" type="Camera2D" parent="."]
 

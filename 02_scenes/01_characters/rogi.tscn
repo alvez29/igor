@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxucjh0senwhw"]
+[gd_scene load_steps=8 format=3 uid="uid://8ahkyti8gljd"]
 
 [ext_resource type="Texture2D" uid="uid://0fwlvk7qfa0k" path="res://01_assets/01_sprites/rogi_animation.png" id="1_br3bg"]
 [ext_resource type="Script" path="res://02_scenes/01_characters/shooter_enemy.gd" id="1_x4g7m"]

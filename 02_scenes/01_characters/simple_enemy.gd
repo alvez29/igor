@@ -8,8 +8,7 @@ var new_anim
 var igor_reference
 var movement_speed
 var health
-
-signal enemy_hit
+var damage
 
 func _ready():
 	change_state(RUN, 0)
@@ -19,8 +18,10 @@ func _physics_process(delta):
 	process_animation()
 
 func _on_hit_area_area_entered(area):
-	if area.is_in_group("projectile"):
-		on_enemy_hit()
+	var area_parent = area.get_parent()
+	
+	if area.is_in_group("projectile") and area_parent is Projectile:
+		take_damage(area_parent.damage)
 			
 func change_state(new_state, damage):
 	state = new_state
@@ -41,9 +42,6 @@ func on_hurt(damage):
 func on_dead():
 	queue_free()
 
-func on_enemy_hit():
-	enemy_hit.emit(self)
-
 func follow_igor(delta):
 	if igor_reference != null:
 		var igor_position = igor_reference.position
@@ -60,7 +58,8 @@ func process_animation():
 func take_damage(damage):
 	change_state(HURT, damage)
 
-func initialize_simple_enemy(igor_reference, health, movement_speed):
+func initialize_simple_enemy(igor_reference, health, movement_speed, damage):
 	self.igor_reference = igor_reference
 	self.health = health
 	self.movement_speed = movement_speed
+	self.damage = damage

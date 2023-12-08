@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Igor extends CharacterBody2D
 
 enum {IDLE, RUN, HURT, DEAD}
 
@@ -21,8 +21,6 @@ var projectile_scene = preload("res://02_scenes/02_objects/projectile.tscn")
 @onready var screen_width = get_viewport_rect().size.x
 @onready var screen_heigth = get_viewport_rect().size.y
 
-signal player_shot
-signal player_hit
 signal end_game
 
 func _ready():
@@ -42,17 +40,24 @@ func _on_reload_timer_timeout():
 	can_shoot = true
 
 func _on_damage_timer_timeout():
-	player_hit.emit()
+	take_damage($enemy_damage_timer.enemy_damage)
 
 func _on_hit_area_area_entered(area):
-	if area.is_in_group("enemy_projectile"):
-		player_shot.emit()
-	if area.is_in_group("enemy") and $enemy_damage_timer.is_stopped():
-		player_hit.emit()
+	var area_parent = area.get_parent()
+	
+	#TODO: puedo ahorrarme los grupos??
+	if area.is_in_group("enemy_projectile") and area_parent is EnemyProjectile:
+		take_damage(area_parent.damage)
+	if area.is_in_group("enemy") and $enemy_damage_timer.is_stopped() and area_parent is SimpleEnemy:
+		var enemy_damage = area_parent.damage
+		
+		take_damage(enemy_damage)
+		$enemy_damage_timer.set_enemy_damage(enemy_damage)
 		$enemy_damage_timer.start()
 
-func _on_hit_area_area_exited(area):
+func _on_hit_area_area_exited(area): 
 	if area.is_in_group("enemy"):
+		$enemy_damage_timer.clear_enemy_damage()
 		$enemy_damage_timer.stop()
 
 func change_state(new_state):
@@ -106,7 +111,7 @@ func shoot():
 
 	if closest_enemy != null:
 		projectile_instance.position = position
-		projectile_instance.initialize_to_closest_enemy(closest_enemy, projectile_speed)
+		projectile_instance.initialize_to_closest_enemy(closest_enemy, projectile_speed, damage)
 		stage_node.add_child(projectile_instance)
 	
 	can_shoot = false

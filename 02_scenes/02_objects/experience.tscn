@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc37blm0iew25"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n7eqp"]
+radius = 120.0
+
+[node name="experience" type="RigidBody2D"]
+collision_layer = 32
+
+[node name="image" type="Sprite2D" parent="."]
+
+[node name="body_collision" type="CollisionShape2D" parent="."]
+
+[node name="attraction_zone" type="Area2D" parent="." groups=["experience"]]
+
+[node name="attraction_collision" type="CollisionShape2D" parent="attraction_zone"]
+shape = SubResource("CircleShape2D_n7eqp")

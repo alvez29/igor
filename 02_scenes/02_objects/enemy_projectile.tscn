@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://7edvuoc7hxkm"]
 
-[ext_resource type="Texture2D" uid="uid://d3022qvyaosje" path="res://01_assets/01_sprites/rogi_proj_animation.png" id="1_mspol"]
-[ext_resource type="Script" path="res://02_scenes/02_objects/rogi_projectile.gd" id="1_yxhw6"]
+[ext_resource type="Script" path="res://02_scenes/02_objects/enemy_projectile.gd" id="1_gcpvr"]
+[ext_resource type="Texture2D" uid="uid://d3022qvyaosje" path="res://01_assets/01_sprites/rogi_proj_animation.png" id="2_hehhd"]
 
 [sub_resource type="Animation" id="Animation_74ndq"]
 length = 0.001
@@ -47,13 +47,13 @@ radius = 9.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_u5okd"]
 radius = 11.0454
 
-[node name="rogi_projectile" type="RigidBody2D" groups=["enemy_projectile"]]
+[node name="enemy_projectile" type="RigidBody2D" groups=["enemy_projectile"]]
 collision_layer = 16
 gravity_scale = 0.0
-script = ExtResource("1_yxhw6")
+script = ExtResource("1_gcpvr")
 
 [node name="image" type="Sprite2D" parent="."]
-texture = ExtResource("1_mspol")
+texture = ExtResource("2_hehhd")
 hframes = 5
 
 [node name="animation" type="AnimationPlayer" parent="."]

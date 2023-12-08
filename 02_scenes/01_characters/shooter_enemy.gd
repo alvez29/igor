@@ -3,8 +3,9 @@ class_name ShooterEnemy extends SimpleEnemy
 var can_shoot = true
 var shooting_speed
 var projectile_speed
+var projectile_damage
 
-var projectile_scene = preload("res://02_scenes/02_objects/rogi_projectile.tscn")
+var projectile_scene = preload("res://02_scenes/02_objects/enemy_projectile.tscn")
 
 # TODO: realmente podría haber hecho esta clase hija de BigRogi y heredar el enemigo base y todo
 
@@ -30,14 +31,16 @@ func shoot():
 
 	if igor_reference != null:
 		projectile_instance.position = position
-		projectile_instance.initialize(igor_reference, projectile_speed)
+		projectile_instance.initialize(igor_reference, projectile_speed, projectile_damage)
 		stage_node.add_child(projectile_instance)
 		can_shoot = false
 		$reload_timer.start()
 		
-func initialize_shooter_enemy(igor_reference, enemy_health, movement_speed, shooting_speed, projectile_speed):
+func initialize_shooter_enemy(igor_reference, enemy_health, movement_speed, melee_damage, projectile_damage, shooting_speed, projectile_speed):
 	self.igor_reference = igor_reference
 	self.health = enemy_health
 	self.movement_speed = movement_speed
+	self.damage = melee_damage
+	self.projectile_damage = projectile_damage
 	self.shooting_speed = shooting_speed
 	self.projectile_speed = projectile_speed
