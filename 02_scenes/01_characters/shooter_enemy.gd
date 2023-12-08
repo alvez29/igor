@@ -10,7 +10,7 @@ var projectile_scene = preload("res://02_scenes/02_objects/enemy_projectile.tscn
 # TODO: realmente podría haber hecho esta clase hija de BigRogi y heredar el enemigo base y todo
 
 func _ready():
-	change_state(RUN, 0)
+	change_state(RUN)
 	set_up_timer()
 
 func _physics_process(delta):
@@ -33,8 +33,8 @@ func shoot():
 		projectile_instance.position = position
 		projectile_instance.initialize(igor_reference, projectile_speed, projectile_damage)
 		stage_node.add_child(projectile_instance)
-		can_shoot = false
 		$reload_timer.start()
+		can_shoot = false
 		
 func initialize_shooter_enemy(igor_reference, enemy_health, movement_speed, melee_damage, projectile_damage, shooting_speed, projectile_speed):
 	self.igor_reference = igor_reference

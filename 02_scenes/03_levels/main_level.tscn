@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dyi0aha1wibwy"]
 
 [ext_resource type="Script" path="res://02_scenes/03_levels/main_level.gd" id="1_prhoq"]
-[ext_resource type="Texture2D" uid="uid://bcvlqn1ubh1hy" path="res://01_assets/01_sprites/background.png" id="2_rr446"]
+[ext_resource type="Texture2D" uid="uid://d1kwnov2fo7wn" path="res://01_assets/01_sprites/background.png" id="2_rr446"]
 [ext_resource type="PackedScene" uid="uid://cn0mc11h82aqa" path="res://02_scenes/01_characters/igor.tscn" id="4_pjrcx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_osgfe"]
@@ -15,7 +15,9 @@ position = Vector2(1080, 1080)
 texture = ExtResource("2_rr446")
 
 [node name="igor" parent="." instance=ExtResource("4_pjrcx")]
-position = Vector2(279, 118)
+position = Vector2(1082, 1075)
+metadata/_edit_vertical_guides_ = [1080.0, 1083.0, 64.0, -81.0, 82.0]
+metadata/_edit_horizontal_guides_ = [-187.0]
 
 [node name="wall" type="StaticBody2D" parent="."]
 position = Vector2(7, 5)

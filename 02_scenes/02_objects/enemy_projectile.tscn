@@ -65,9 +65,11 @@ autoplay = "fly"
 [node name="body_collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_eeel7")
 
-[node name="hit_area" type="Area2D" parent="." groups=["enemy_projectile"]]
+[node name="hit_area" type="Area2D" parent="."]
+collision_layer = 16
 
 [node name="hit_collision" type="CollisionShape2D" parent="hit_area"]
 shape = SubResource("CircleShape2D_u5okd")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="hit_area" to="." method="_on_hit_area_area_entered"]

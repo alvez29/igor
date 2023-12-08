@@ -11,7 +11,7 @@ var can_shoot = true
 
 var movement_speed:int = 500
 var shooting_speed:float = 0.4
-var projectile_speed:float = 10
+var projectile_speed:float = 600
 var damage:float = 10
 var health:float = 100
 var max_health:float = 100
@@ -25,16 +25,15 @@ signal end_game
 
 func _ready():
 	change_state(IDLE)
-	#TODO: crear sistema de experiencia
 	update_health_bar()
 
 func _physics_process(delta):
-	var motion = process_input(delta)
+	process_input(delta)
 	move_and_slide()
-	if can_shoot:
-		shoot()
 	process_animation()
 	update_health_bar()
+	if can_shoot:
+		shoot()
 
 func _on_reload_timer_timeout():
 	can_shoot = true
@@ -45,18 +44,17 @@ func _on_damage_timer_timeout():
 func _on_hit_area_area_entered(area):
 	var area_parent = area.get_parent()
 	
-	#TODO: puedo ahorrarme los grupos??
-	if area.is_in_group("enemy_projectile") and area_parent is EnemyProjectile:
+	if area_parent is EnemyProjectile:
 		take_damage(area_parent.damage)
-	if area.is_in_group("enemy") and $enemy_damage_timer.is_stopped() and area_parent is SimpleEnemy:
+	if area_parent is SimpleEnemy and $enemy_damage_timer.is_stopped():
 		var enemy_damage = area_parent.damage
 		
 		take_damage(enemy_damage)
 		$enemy_damage_timer.set_enemy_damage(enemy_damage)
 		$enemy_damage_timer.start()
 
-func _on_hit_area_area_exited(area): 
-	if area.is_in_group("enemy"):
+func _on_hit_area_area_exited(area):
+	if area.get_parent() is SimpleEnemy:
 		$enemy_damage_timer.clear_enemy_damage()
 		$enemy_damage_timer.stop()
 
@@ -113,8 +111,7 @@ func shoot():
 		projectile_instance.position = position
 		projectile_instance.initialize_to_closest_enemy(closest_enemy, projectile_speed, damage)
 		stage_node.add_child(projectile_instance)
-	
-	can_shoot = false
+		can_shoot = false
 	
 	$reload_timer.wait_time = shooting_speed
 	$reload_timer.start()
@@ -126,7 +123,7 @@ func shoot():
 
 func take_damage(damage):
 	self.health -= damage
-	print("La vida de igor es:" + str(health))
+	print("igor's health: " + str(health))
 	if health <= 0:
 		end_game.emit()
 
@@ -142,7 +139,7 @@ func find_closest_enemy():
 	for enemy in enemies:
 		var distance = (enemy.position - position).length()
 		
-		if (closest_enemy == null and closest_distance == null or distance < closest_distance):
+		if closest_enemy == null and closest_distance == null or distance < closest_distance:
 			closest_enemy = enemy
 			closest_distance = distance
 	
