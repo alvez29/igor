@@ -3,7 +3,7 @@ extends Node2D
 #TODO: podría añadir un objeto que encapsulara los parámetros
 var enemy_health = 20
 var enemy_movement_speed = 300
-var enemy_projectile_speed = 700
+var enemy_projectile_speed = 500
 var enemy_shooting_speed = 1
 
 var enemy_projectile_damage = 5
@@ -25,6 +25,11 @@ func _ready():
 
 func _process(delta):
 	update_exp_progress_bar()
+	
+	if Input.is_key_pressed(KEY_1):
+		$igor.process_upgrade()
+
+	
 	
 func _on_end_game():
 	#TODO

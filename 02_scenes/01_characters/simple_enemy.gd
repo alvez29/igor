@@ -64,11 +64,11 @@ func take_damage(enemy_damage):
 	if health <= 0:
 		change_state(DEAD)
 
-func initialize_simple_enemy(new_igor_reference, new_health, new_movement_speed, new_damage):
-	self.igor_reference = new_igor_reference
-	self.health = new_health
-	self.movement_speed = new_movement_speed
-	self.damage = new_damage
+func initialize_simple_enemy(igor_reference, health, movement_speed, damage):
+	self.igor_reference = igor_reference
+	self.health = health
+	self.movement_speed = movement_speed
+	self.damage = damage
 
 
 func _on_hurt_animation_timer_timeout():

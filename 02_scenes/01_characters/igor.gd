@@ -9,12 +9,7 @@ var anim
 var new_anim
 var can_shoot = true
 
-var movement_speed:int = 500
-var shooting_speed:float = 0.4
-var projectile_speed:float = 600
-var damage:float = 10
-var health:float = 100
-var max_health:float = 100
+var stats:PlayerStats
 
 var projectile_scene = preload("res://02_scenes/02_objects/projectile.tscn")
 
@@ -25,6 +20,7 @@ signal end_game
 
 func _ready():
 	change_state(IDLE)
+	stats = PlayerStats.new()
 	update_health_bar()
 
 func _physics_process(delta):
@@ -89,16 +85,16 @@ func process_input(delta):
 	velocity.y = 0
 	
 	if up:
-		velocity.y = -movement_speed
+		velocity.y = -stats.movement_speed
 		change_state(RUN)
 	if down:
-		velocity.y = movement_speed
+		velocity.y = stats.movement_speed
 		change_state(RUN)
 	if left:
-		velocity.x = -movement_speed
+		velocity.x = -stats.movement_speed
 		change_state(RUN)
 	if right:
-		velocity.x = movement_speed
+		velocity.x = stats.movement_speed
 		change_state(RUN)
 
 func shoot():
@@ -109,27 +105,29 @@ func shoot():
 
 	if closest_enemy != null:
 		projectile_instance.position = position
-		projectile_instance.initialize_to_closest_enemy(closest_enemy, projectile_speed, damage)
+		projectile_instance.initialize_to_closest_enemy(closest_enemy, stats.projectile_speed, stats.damage)
 		stage_node.add_child(projectile_instance)
 		can_shoot = false
 	
-	$reload_timer.wait_time = shooting_speed
+	$reload_timer.wait_time = stats.shooting_speed
 	$reload_timer.start()
-
-
+	
 # endregion
 
 # region public functions
 
 func take_damage(damage):
-	self.health -= damage
-	print("igor's health: " + str(health))
-	if health <= 0:
+	stats.health -= damage
+	print("igor's health: " + str(stats.health))
+	if stats.health <= 0:
 		end_game.emit()
 
 # endregion
 
 # region auxiliar functions
+
+func process_upgrade():
+	pass
 
 func find_closest_enemy():
 	var enemies = get_tree().get_nodes_in_group("enemy")
@@ -151,7 +149,7 @@ func process_animation():
 		$animation.play(anim)
 		
 func update_health_bar():
-	$health_bar.max_value = max_health
-	$health_bar.value = health
+	$health_bar.max_value = stats.max_health
+	$health_bar.value = stats.health
 
 # endregion

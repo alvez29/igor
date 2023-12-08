@@ -1,0 +1,187 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyi0aha1wibwy"]
+
+[ext_resource type="Script" path="res://02_scenes/03_levels/main_level.gd" id="1_prhoq"]
+[ext_resource type="Texture2D" uid="uid://d1kwnov2fo7wn" path="res://01_assets/01_sprites/background.png" id="2_rr446"]
+[ext_resource type="PackedScene" uid="uid://cn0mc11h82aqa" path="res://02_scenes/01_characters/igor.tscn" id="4_pjrcx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_osgfe"]
+size = Vector2(998.5, 20)
+
+[node name="main_level" type="Node2D"]
+script = ExtResource("1_prhoq")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(1080, 1080)
+texture = ExtResource("2_rr446")
+
+[node name="igor" parent="." instance=ExtResource("4_pjrcx")]
+position = Vector2(1082, 1075)
+metadata/_edit_vertical_guides_ = [1080.0, 1083.0, 64.0, -81.0, 82.0]
+metadata/_edit_horizontal_guides_ = [-187.0]
+
+[node name="wall" type="StaticBody2D" parent="."]
+position = Vector2(7, 5)
+scale = Vector2(0.996469, 0.994579)
+collision_layer = 8
+collision_mask = 0
+
+[node name="wall_collision" type="CollisionShape2D" parent="wall"]
+position = Vector2(131.464, 521.829)
+rotation = -0.965176
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision2" type="CollisionShape2D" parent="wall"]
+position = Vector2(20.0708, 775.202)
+rotation = -1.2023
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision3" type="CollisionShape2D" parent="wall"]
+position = Vector2(-12.0425, 950.151)
+rotation = -1.43154
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision4" type="CollisionShape2D" parent="wall"]
+position = Vector2(-18.0638, 1104.99)
+rotation = -1.61215
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision5" type="CollisionShape2D" parent="wall"]
+position = Vector2(34.1205, 1411.65)
+rotation = -1.91034
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision6" type="CollisionShape2D" parent="wall"]
+position = Vector2(198.702, 1733.4)
+rotation = -2.21792
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision7" type="CollisionShape2D" parent="wall"]
+position = Vector2(389.375, 1933.48)
+rotation = -2.44654
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision8" type="CollisionShape2D" parent="wall"]
+position = Vector2(728.572, 2125.52)
+rotation = -2.73951
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision9" type="CollisionShape2D" parent="wall"]
+position = Vector2(1015.59, 2180.82)
+rotation = -3.0038
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision10" type="CollisionShape2D" parent="wall"]
+position = Vector2(1227.33, 2171.77)
+rotation = -3.18968
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision11" type="CollisionShape2D" parent="wall"]
+position = Vector2(1462.16, 2115.47)
+rotation = -3.38798
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision12" type="CollisionShape2D" parent="wall"]
+position = Vector2(1595.63, 2048.1)
+rotation = -3.59725
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision13" type="CollisionShape2D" parent="wall"]
+position = Vector2(1756.2, 1942.53)
+rotation = -3.80435
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision14" type="CollisionShape2D" parent="wall"]
+position = Vector2(1913.76, 1790.71)
+rotation = -3.98132
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision15" type="CollisionShape2D" parent="wall"]
+position = Vector2(2043.21, 1601.68)
+rotation = -4.15733
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision16" type="CollisionShape2D" parent="wall"]
+position = Vector2(2149.59, 1311.11)
+rotation = -4.46441
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision17" type="CollisionShape2D" parent="wall"]
+position = Vector2(2171.67, 1043.66)
+rotation = -4.72321
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision18" type="CollisionShape2D" parent="wall"]
+position = Vector2(2141.56, 791.29)
+rotation = -4.86748
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision19" type="CollisionShape2D" parent="wall"]
+position = Vector2(2053.25, 574.112)
+rotation = -5.1168
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision20" type="CollisionShape2D" parent="wall"]
+position = Vector2(1956.91, 416.257)
+rotation = -5.2684
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision21" type="CollisionShape2D" parent="wall"]
+position = Vector2(1819.42, 267.45)
+rotation = -5.44972
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision22" type="CollisionShape2D" parent="wall"]
+position = Vector2(1666.89, 150.818)
+rotation = -5.62171
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision23" type="CollisionShape2D" parent="wall"]
+position = Vector2(1511.34, 71.387)
+rotation = -5.84956
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision24" type="CollisionShape2D" parent="wall"]
+position = Vector2(1304.61, 5.02726)
+rotation = -6.04298
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision25" type="CollisionShape2D" parent="wall"]
+position = Vector2(932.292, -15.0818)
+rotation = -6.29799
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision26" type="CollisionShape2D" parent="wall"]
+position = Vector2(742.622, 33.1799)
+rotation = -6.53468
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision27" type="CollisionShape2D" parent="wall"]
+position = Vector2(580.048, 100.545)
+rotation = -6.69173
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision28" type="CollisionShape2D" parent="wall"]
+position = Vector2(405.432, 208.128)
+rotation = -6.84993
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision29" type="CollisionShape2D" parent="wall"]
+position = Vector2(305.077, 302.641)
+rotation = -7.05555
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision30" type="CollisionShape2D" parent="wall"]
+position = Vector2(305.077, 302.641)
+rotation = -7.05555
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="wall_collision31" type="CollisionShape2D" parent="wall"]
+position = Vector2(305.077, 302.641)
+rotation = -7.05555
+shape = SubResource("RectangleShape2D_osgfe")
+
+[node name="spawn_enemies" type="Timer" parent="."]
+process_mode = 1
+autostart = true
+
+[connection signal="timeout" from="spawn_enemies" to="." method="_on_spawn_enemies_timeout"]
