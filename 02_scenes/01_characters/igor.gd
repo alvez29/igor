@@ -26,6 +26,13 @@ func _ready():
 func _physics_process(delta):
 	process_input(delta)
 	move_and_slide()
+	
+	if is_on_wall():
+		velocity.slide(get_wall_normal())
+	print("is on floor: " + str(is_on_floor()))
+	print("is on wall: " + str(is_on_wall()))
+	print("is on ceiling: " + str(is_on_ceiling()))
+	
 	process_animation()
 	update_health_bar()
 	if can_shoot:
@@ -126,8 +133,8 @@ func take_damage(damage):
 
 # region auxiliar functions
 
-func process_upgrade():
-	pass
+func process_upgrade(upgrade:Upgrade):
+	stats = upgrade.apply(stats)
 
 func find_closest_enemy():
 	var enemies = get_tree().get_nodes_in_group("enemy")

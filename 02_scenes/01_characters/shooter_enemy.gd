@@ -7,8 +7,6 @@ var projectile_damage
 
 var projectile_scene = preload("res://02_scenes/02_objects/enemy_projectile.tscn")
 
-# TODO: realmente podría haber hecho esta clase hija de BigRogi y heredar el enemigo base y todo
-
 func _ready():
 	change_state(RUN)
 	set_up_timer()

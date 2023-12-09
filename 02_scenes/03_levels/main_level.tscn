@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyi0aha1wibwy"]
+[gd_scene load_steps=4 format=3 uid="uid://dyi0aha1wibwy"]
 
 [ext_resource type="Script" path="res://02_scenes/03_levels/main_level.gd" id="1_prhoq"]
 [ext_resource type="Texture2D" uid="uid://d1kwnov2fo7wn" path="res://01_assets/01_sprites/background.png" id="2_rr446"]
 [ext_resource type="PackedScene" uid="uid://cn0mc11h82aqa" path="res://02_scenes/01_characters/igor.tscn" id="4_pjrcx"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_osgfe"]
-size = Vector2(998.5, 20)
 
 [node name="main_level" type="Node2D"]
 script = ExtResource("1_prhoq")
@@ -19,169 +16,18 @@ position = Vector2(1082, 1075)
 metadata/_edit_vertical_guides_ = [1080.0, 1083.0, 64.0, -81.0, 82.0]
 metadata/_edit_horizontal_guides_ = [-187.0]
 
-[node name="wall" type="StaticBody2D" parent="."]
-position = Vector2(7, 5)
-scale = Vector2(0.996469, 0.994579)
-collision_layer = 8
-collision_mask = 0
-
-[node name="wall_collision" type="CollisionShape2D" parent="wall"]
-position = Vector2(131.464, 521.829)
-rotation = -0.965176
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision2" type="CollisionShape2D" parent="wall"]
-position = Vector2(20.0708, 775.202)
-rotation = -1.2023
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision3" type="CollisionShape2D" parent="wall"]
-position = Vector2(-12.0425, 950.151)
-rotation = -1.43154
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision4" type="CollisionShape2D" parent="wall"]
-position = Vector2(-18.0638, 1104.99)
-rotation = -1.61215
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision5" type="CollisionShape2D" parent="wall"]
-position = Vector2(34.1205, 1411.65)
-rotation = -1.91034
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision6" type="CollisionShape2D" parent="wall"]
-position = Vector2(198.702, 1733.4)
-rotation = -2.21792
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision7" type="CollisionShape2D" parent="wall"]
-position = Vector2(389.375, 1933.48)
-rotation = -2.44654
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision8" type="CollisionShape2D" parent="wall"]
-position = Vector2(728.572, 2125.52)
-rotation = -2.73951
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision9" type="CollisionShape2D" parent="wall"]
-position = Vector2(1015.59, 2180.82)
-rotation = -3.0038
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision10" type="CollisionShape2D" parent="wall"]
-position = Vector2(1227.33, 2171.77)
-rotation = -3.18968
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision11" type="CollisionShape2D" parent="wall"]
-position = Vector2(1462.16, 2115.47)
-rotation = -3.38798
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision12" type="CollisionShape2D" parent="wall"]
-position = Vector2(1595.63, 2048.1)
-rotation = -3.59725
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision13" type="CollisionShape2D" parent="wall"]
-position = Vector2(1756.2, 1942.53)
-rotation = -3.80435
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision14" type="CollisionShape2D" parent="wall"]
-position = Vector2(1913.76, 1790.71)
-rotation = -3.98132
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision15" type="CollisionShape2D" parent="wall"]
-position = Vector2(2043.21, 1601.68)
-rotation = -4.15733
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision16" type="CollisionShape2D" parent="wall"]
-position = Vector2(2149.59, 1311.11)
-rotation = -4.46441
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision17" type="CollisionShape2D" parent="wall"]
-position = Vector2(2171.67, 1043.66)
-rotation = -4.72321
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision18" type="CollisionShape2D" parent="wall"]
-position = Vector2(2141.56, 791.29)
-rotation = -4.86748
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision19" type="CollisionShape2D" parent="wall"]
-position = Vector2(2053.25, 574.112)
-rotation = -5.1168
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision20" type="CollisionShape2D" parent="wall"]
-position = Vector2(1956.91, 416.257)
-rotation = -5.2684
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision21" type="CollisionShape2D" parent="wall"]
-position = Vector2(1819.42, 267.45)
-rotation = -5.44972
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision22" type="CollisionShape2D" parent="wall"]
-position = Vector2(1666.89, 150.818)
-rotation = -5.62171
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision23" type="CollisionShape2D" parent="wall"]
-position = Vector2(1511.34, 71.387)
-rotation = -5.84956
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision24" type="CollisionShape2D" parent="wall"]
-position = Vector2(1304.61, 5.02726)
-rotation = -6.04298
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision25" type="CollisionShape2D" parent="wall"]
-position = Vector2(932.292, -15.0818)
-rotation = -6.29799
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision26" type="CollisionShape2D" parent="wall"]
-position = Vector2(742.622, 33.1799)
-rotation = -6.53468
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision27" type="CollisionShape2D" parent="wall"]
-position = Vector2(580.048, 100.545)
-rotation = -6.69173
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision28" type="CollisionShape2D" parent="wall"]
-position = Vector2(405.432, 208.128)
-rotation = -6.84993
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision29" type="CollisionShape2D" parent="wall"]
-position = Vector2(305.077, 302.641)
-rotation = -7.05555
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision30" type="CollisionShape2D" parent="wall"]
-position = Vector2(305.077, 302.641)
-rotation = -7.05555
-shape = SubResource("RectangleShape2D_osgfe")
-
-[node name="wall_collision31" type="CollisionShape2D" parent="wall"]
-position = Vector2(305.077, 302.641)
-rotation = -7.05555
-shape = SubResource("RectangleShape2D_osgfe")
-
 [node name="spawn_enemies" type="Timer" parent="."]
 process_mode = 1
 autostart = true
+
+[node name="wall_test" type="StaticBody2D" parent="."]
+position = Vector2(2173, 1047)
+rotation = 3.14159
+collision_layer = 8
+
+[node name="wall_collision" type="CollisionPolygon2D" parent="wall_test"]
+position = Vector2(1093, 1048)
+rotation = -0.523598
+polygon = PackedVector2Array(-1.73193, -0.999939, 34.275, 18.6342, 105.691, 52.9383, 204.623, 91.5822, 341.403, 126.674, 438.345, 138.765, 549.581, 144.098, 656.158, 137.503, 761.038, 121.846, 840.633, 101.983, 930.327, 70.6292, 1013.59, 34.4097, 1087.2, -5.07782, 1173.9, -61.2518, 1228.92, -104.543, 1289.43, -157.361, 1348.76, -220.107, 1397.51, -278.559, 1425.34, -316.762, 1462.81, -373.651, 1488.31, -417.818, 1507.58, -455.191, 1525.11, -493.564, 1545.55, -542.964, 1562.36, -584.069, 1582.5, -650.958, 1594.24, -697.296, 1605.42, -756.659, 1617.34, -843.307, 1620.46, -902.706, 1619.61, -963.24, 1617.17, -1027.01, 1609.63, -1087.94, 1599.85, -1149.01, 1584.51, -1214.44, 1567.41, -1272.82, 1548.17, -1325.49, 1523.87, -1383.4, 1497.93, -1436.48, 1464.34, -1496.29, 1422.45, -1559.74, 1379.29, -1616.99, 1328.57, -1675.14, 1276.58, -1727.09, 1208.37, -1784.95, 1154.35, -1825.38, 1107.35, -1855.98, 1058.86, -1883.98, 983.61, -1921.65, 918.855, -1947.49, 830.547, -1976.53, 743.068, -1997.02, 644.894, -2010.97, 540.354, -2015.91, 461.33, -2013.03, 387.869, -2005.79, 318.603, -1993.82, 237.142, -1972.73, 165.34, -1948.36, 94.6369, -1919.9, 29.9957, -1887.94, -31.3152, -1851.75, -96.1262, -1809.49, -155.875, -1762.01, -213.16, -1710.79, -265.883, -1653.47, -309.275, -1602.31, -356.704, -1536.16, -369.802, -1519.48, -415.802, -1439.8, -443.972, -1381.01, -478.214, -1295.7, -498.224, -1231.04, -517.538, -1155.59, -529.887, -1084.2, -536.809, -1006.22, -539.266, -927.959, -536.821, -864.194, -531.279, -799.795, -521.87, -740.091, -506.801, -670.192, -482.108, -588.963, -456.611, -521.125, -431.31, -464.948, -402.41, -409.003, -372.243, -359.254, -329.488, -295.309, -286.196, -240.293, -236.575, -186.24, -186.185, -137.517, -131.198, -90.7587, -72.8439, -47.8303, -38.4709, -23.3661, -1.73193, -0.999939, -24.0001, 41.5692, -1006.32, -581.004, 123.724, -2546.28, 2099.02, -1381.59, 985.195, 589.592, -24.0001, 41.5692)
 
 [connection signal="timeout" from="spawn_enemies" to="." method="_on_spawn_enemies_timeout"]

@@ -16,20 +16,21 @@ var experience_scene = load("res://02_scenes/02_objects/experience.tscn")
 var spawn_enemy_time = 0.77
 var experience = 0
 # this variable is used to level up faster. it is the experience value
-var experience_factor = 1.7
+var experience_factor = 4
+
+var debug_pressed = false
 
 func _ready():
 	initialize_igor()
 	set_up_timer()
-	#TODO: me quedo pegado en la pared
-
+   
 func _process(delta):
 	update_exp_progress_bar()
 	
-	if Input.is_key_pressed(KEY_1):
-		$igor.process_upgrade()
-
-	
+	#TODO: delete this: this is a debug feature
+	if !debug_pressed and Input.is_key_pressed(KEY_1):
+		$igor.process_upgrade(HealUpgrade.new())
+		debug_pressed = true
 	
 func _on_end_game():
 	#TODO
@@ -59,7 +60,7 @@ func initialize_igor():
 	
 func set_up_timer():
 	$spawn_enemies.wait_time = spawn_enemy_time
-	
+
 func spawn_enemy():
 	var random_point = get_random_point()
 	var should_spawn_shooter = randi_range(0, 1)
