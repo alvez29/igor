@@ -27,15 +27,15 @@ func shoot():
 	var stage_node = get_parent()
 	var projectile_instance = projectile_scene.instantiate()
 
-	if igor_reference != null:
+	if player_reference != null:
 		projectile_instance.position = position
-		projectile_instance.initialize(igor_reference, projectile_speed, projectile_damage)
+		projectile_instance.initialize(player_reference, projectile_speed, projectile_damage)
 		stage_node.add_child(projectile_instance)
 		$reload_timer.start()
 		can_shoot = false
 		
-func initialize_shooter_enemy(igor_reference, enemy_health, movement_speed, melee_damage, projectile_damage, shooting_speed, projectile_speed):
-	self.igor_reference = igor_reference
+func initialize_shooter_enemy(player_reference, enemy_health, movement_speed, melee_damage, projectile_damage, shooting_speed, projectile_speed):
+	self.player_reference = player_reference
 	self.health = enemy_health
 	self.movement_speed = movement_speed
 	self.damage = melee_damage

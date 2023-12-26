@@ -2,8 +2,6 @@ class_name Experience extends RigidBody2D
 
 const FLYING_SPEED = 400
 
-var factor = 1
-
 signal on_exp_collected
 
 func _physics_process(delta):
@@ -16,10 +14,11 @@ func _physics_process(delta):
 			var collision = move_and_collide(movement_direction * FLYING_SPEED * delta)
 			
 			if collision:
-				on_exp_collected.emit(factor)
+				on_exp_collected.emit()
 				queue_free()
 	else:
 		linear_velocity = Vector2(0, 0)
-
-func set_factor(new_factor):
-	self.factor = new_factor
+	
+# TODO: Añadir en un archivo utils
+func distance_between(first_position, second_position):
+	return (second_position.x - first_position.x)**2 + (second_position.y - first_position.y)**2

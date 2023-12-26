@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cn0mc11h82aqa"]
+[gd_scene load_steps=10 format=3 uid="uid://cn0mc11h82aqa"]
 
 [ext_resource type="Script" path="res://02_scenes/01_characters/igor.gd" id="1_aevrl"]
 [ext_resource type="Texture2D" uid="uid://c4ry2n6xl5yrc" path="res://01_assets/01_sprites/igor_animation.png" id="2_7jn6h"]
@@ -50,15 +50,12 @@ radius = 39.0512
 [sub_resource type="CircleShape2D" id="CircleShape2D_amtl3"]
 radius = 28.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjwlp"]
-bg_color = Color(1, 0.929412, 0.196078, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wyyho"]
 bg_color = Color(0.992157, 0, 0, 1)
 
 [node name="igor" type="CharacterBody2D" groups=["player"]]
 z_index = 2
-collision_mask = 58
+collision_mask = 26
 motion_mode = 1
 script = ExtResource("1_aevrl")
 metadata/_edit_vertical_guides_ = [1080.0, 1083.0]
@@ -89,14 +86,7 @@ wait_time = 0.5
 script = ExtResource("3_dvtra")
 
 [node name="camera" type="Camera2D" parent="."]
-
-[node name="exp_bar" type="ProgressBar" parent="camera"]
-offset_left = -540.0
-offset_top = -539.0
-offset_right = 540.0
-offset_bottom = -512.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_xjwlp")
-show_percentage = false
+zoom = Vector2(0.8, 0.8)
 
 [node name="health_bar" type="ProgressBar" parent="."]
 z_index = 2

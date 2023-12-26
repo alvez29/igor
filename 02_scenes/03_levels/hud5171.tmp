@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxq1vfr86sk5m"]
+
+[ext_resource type="Script" path="res://02_scenes/03_levels/hud.gd" id="1_da1df"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttf0u"]
+bg_color = Color(1, 0.929412, 0.196078, 1)
+
+[node name="hud" type="CanvasLayer"]
+script = ExtResource("1_da1df")
+
+[node name="hud_control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="exp_bar" type="ProgressBar" parent="hud_control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_ttf0u")
+show_percentage = false

@@ -24,15 +24,9 @@ func _ready():
 	update_health_bar()
 
 func _physics_process(delta):
-	process_input(delta)
+	#process_input(delta)
+	process_input_test(delta)
 	move_and_slide()
-	
-	if is_on_wall():
-		velocity.slide(get_wall_normal())
-	print("is on floor: " + str(is_on_floor()))
-	print("is on wall: " + str(is_on_wall()))
-	print("is on ceiling: " + str(is_on_ceiling()))
-	
 	process_animation()
 	update_health_bar()
 	if can_shoot:
@@ -104,6 +98,22 @@ func process_input(delta):
 		velocity.x = stats.movement_speed
 		change_state(RUN)
 
+func process_input_test(delta):
+	var input = Vector2.ZERO
+	
+	input.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
+	input.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
+	input = input.normalized()
+	
+	if input == Vector2.ZERO:
+		if velocity.length() > stats.friction * delta:
+			velocity -= velocity.normalized() * stats.friction * delta
+		else:
+			velocity = Vector2.ZERO
+	else:
+		velocity += input * stats.accel * delta
+		velocity = velocity.limit_length(stats.movement_speed)
+		
 func shoot():
 	# TODO: calcular el enemigo más cerca puede ser un problema con muchos enemigos
 	var closest_enemy = find_closest_enemy()
@@ -142,7 +152,7 @@ func find_closest_enemy():
 	var closest_distance = null
 	
 	for enemy in enemies:
-		var distance = (enemy.position - position).length()
+		var distance = distance_between(position, enemy.position)
 		
 		if closest_enemy == null and closest_distance == null or distance < closest_distance:
 			closest_enemy = enemy
@@ -158,5 +168,8 @@ func process_animation():
 func update_health_bar():
 	$health_bar.max_value = stats.max_health
 	$health_bar.value = stats.health
+
+func distance_between(first_position, second_position):
+	return (second_position.x - first_position.x)**2 + (second_position.y - first_position.y)**2
 
 # endregion
