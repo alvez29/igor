@@ -1,8 +1,8 @@
-class_name MoreMovementSpeedUpgrade extends Upgrade
+class_name ReduceFrictionUpgrade extends Upgrade
 
-func _init(name = "Reduce friction", description = "Your slide value decrease 20%"):
+func _init(name = "More friction", description = "Your slide value decrease and gain more friction"):
 	self.name = name
 	self.description = description
 
 func apply(stats:PlayerStats):
-	stats.friction *= 0.5
+	stats.friction += 500

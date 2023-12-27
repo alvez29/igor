@@ -1,11 +1,102 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxq1vfr86sk5m"]
+[gd_scene load_steps=7 format=3 uid="uid://dxq1vfr86sk5m"]
 
 [ext_resource type="Script" path="res://02_scenes/03_levels/hud.gd" id="1_da1df"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttf0u"]
 bg_color = Color(1, 0.929412, 0.196078, 1)
 
+[sub_resource type="Animation" id="Animation_v3wbn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hud_control/round_stats_container/time_left:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hud_control/round_stats_container/round:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bbj35"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hud_control/round_stats_container/time_left:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hud_control/round_stats_container/round:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x1ws4"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hud_control/round_stats_container/time_left:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hud_control/round_stats_container/round:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_61omj"]
+_data = {
+"RESET": SubResource("Animation_v3wbn"),
+"fade_in": SubResource("Animation_x1ws4"),
+"fade_out": SubResource("Animation_bbj35")
+}
+
 [node name="hud" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_da1df")
 
 [node name="hud_control" type="Control" parent="."]
@@ -25,33 +116,51 @@ grow_horizontal = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_ttf0u")
 show_percentage = false
 
-[node name="time_left" type="Label" parent="hud_control"]
+[node name="round_stats_container" type="VBoxContainer" parent="hud_control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
+offset_left = -78.0
+offset_top = -142.0
+offset_right = 78.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="time_left" type="Label" parent="hud_control/round_stats_container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 60
 text = "0:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="round" type="Label" parent="hud_control/round_stats_container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "round 1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="upgrades_container" type="HBoxContainer" parent="hud_control"]
 visible = false
+clip_contents = true
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="first_upgrade" type="Button" parent="hud_control/upgrades_container"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "First Upgrade"
@@ -65,6 +174,12 @@ text = "Second Upgrade"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Third Upgrade"
+
+[node name="animation" type="AnimationPlayer" parent="hud_control"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_61omj")
+}
 
 [connection signal="pressed" from="hud_control/upgrades_container/first_upgrade" to="." method="_on_first_upgrade_pressed"]
 [connection signal="pressed" from="hud_control/upgrades_container/second_upgrade" to="." method="_on_second_upgrade_pressed"]

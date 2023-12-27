@@ -5,7 +5,8 @@ const EXPERIENCE_REDUCTION_FACTOR = 0.8
 #TODO: Añadir más rondas y equilibrar
 var round_stats_by_rounds = [
 	RoundStats.createRoundOneStats(),
-	RoundStats.createRoundTwoStats()
+	RoundStats.createRoundTwoStats(),
+	RoundStats.createRoundThreeStats()
 ]
 
 var round_stats:RoundStats
@@ -17,7 +18,7 @@ var experience_scene = load("res://02_scenes/02_objects/experience.tscn")
 var round = 0
 var experience = 0
 # this variable is used to round up faster. it is the experience value
-var experience_factor = 10
+var experience_factor = 15
 
 func _ready():
 	initialize_igor()
@@ -26,12 +27,7 @@ func _ready():
    
 func _process(delta):
 	update_hud()
-	
-	#TODO: delete this: this is a debug feature
-	if Input.is_key_pressed(KEY_1):
-		$game/igor.process_upgrade(HealUpgrade.new())
 
-	
 func _game_over():
 	#TODO
 	pass
@@ -57,25 +53,25 @@ func _on_exp_collected():
 
 func update_hud():
 	$hud.update_exp(experience)
-	if !$game/round_timer.is_stopped():
-		$hud.update_time(int($game/round_timer.time_left))
+	if !$round_timer.is_stopped():
+		$hud.update_time(int($round_timer.time_left))
 
 func on_exp_level_reached():
 	$hud.show_random_stats_upgrades()
 	pause_game()
 
 func initialize_igor():
-	$game/igor.position = Vector2(1080, 1080)
-	$game/igor.connect("end_game", _game_over)
+	$igor.position = Vector2(1080, 1080)
+	$igor.connect("end_game", _game_over)
 	
 func initialize_level_stats():
 	round_stats = round_stats_by_rounds[round]
 	
 func set_up_timers():
-	$game/spawn_enemies.wait_time = round_stats.spawn_enemy_time
-	$game/round_timer.wait_time = round_stats.round_time
-	$game/round_timer.start()
-	$game/spawn_enemies.start()
+	$spawn_enemies.wait_time = round_stats.spawn_enemy_time
+	$round_timer.wait_time = round_stats.round_time
+	$round_timer.start()
+	$spawn_enemies.start()
 
 func spawn_enemy():
 	var random_point = get_random_point()
@@ -84,10 +80,10 @@ func spawn_enemy():
 	
 	if should_spawn_shooter:
 		enemy_instance = shooter_enemy_scene.instantiate()
-		enemy_instance.initialize_shooter_enemy($game/igor, round_stats.shooter_enemy_health, round_stats.enemy_movement_speed, round_stats.enemy_melee_damage, round_stats.enemy_projectile_damage, round_stats.enemy_shooting_speed, round_stats.enemy_projectile_speed)
+		enemy_instance.initialize_shooter_enemy($igor, round_stats.shooter_enemy_health, round_stats.enemy_movement_speed, round_stats.enemy_melee_damage, round_stats.enemy_projectile_damage, round_stats.enemy_shooting_speed, round_stats.enemy_projectile_speed)
 	else:
 		enemy_instance = simple_enemy_scene.instantiate()
-		enemy_instance.initialize_simple_enemy($game/igor, round_stats.simple_enemy_health, round_stats.enemy_movement_speed, round_stats.enemy_melee_damage)
+		enemy_instance.initialize_simple_enemy($igor, round_stats.simple_enemy_health, round_stats.enemy_movement_speed, round_stats.enemy_melee_damage)
 	
 	if enemy_instance is SimpleEnemy:
 		enemy_instance.position = random_point
@@ -109,14 +105,16 @@ func clear_round_enemies():
 		enemy.queue_free()
 
 func pause_game():
-	pass
+	get_tree().paused = true
 	
 func next_round():
 	round += 1
 	
 	if round < round_stats_by_rounds.size():
 		round_stats = round_stats_by_rounds[round]
+		$hud.update_round(round)
 		set_up_timers()
+		$hud.fade_time_in()
 	else:
 		win_game()
 	
@@ -127,12 +125,14 @@ func win_game():
 	pass
 
 func _on_round_timer_timeout():
-	$game/spawn_enemies.stop()
+	$hud.fade_time_out()
+	$spawn_enemies.stop()
 	clear_round_enemies()
-	$game/pre_round_wait_timer.start()
+	$pre_round_wait_timer.start()
 
 func _on_pre_round_wait_timer_timeout():
 	next_round()
 
 func _on_hud_upgrade_selected(upgrade):
-	$game/igor.process_upgrade(upgrade)
+	get_tree().paused = false
+	$igor.process_upgrade(upgrade)

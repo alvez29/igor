@@ -1,3 +1,4 @@
+# TODO: Tendré que hacer un RigidBody si quiero hacer que choque y el jugador lo empuje 
 class_name SimpleEnemy extends CharacterBody2D
 
 enum {RUN, HURT, DEAD}
@@ -49,9 +50,8 @@ func follow_igor(_delta):
 	if player_reference != null:
 		var player_position = player_reference.position
 		var direction_vector = (player_position - position).normalized()
-		velocity = direction_vector * movement_speed
-		
-		move_and_slide()
+		velocity =  direction_vector * movement_speed
+	move_and_slide()
 
 func process_animation():
 	if new_anim != anim:

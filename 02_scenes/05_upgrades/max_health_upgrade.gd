@@ -1,6 +1,6 @@
 class_name MaxHealthUpgrade extends Upgrade
 
-func _init(name = "Get Healthier", description = "Increase your Max Health a 40%"):
+func _init(name = "Get Healthier", description = "Increase 40% your max health"):
 	self.name = name
 	self.description = description
 
