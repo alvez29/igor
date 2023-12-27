@@ -19,13 +19,10 @@ metadata/_edit_horizontal_guides_ = [-187.0]
 
 [node name="spawn_enemies" type="Timer" parent="."]
 process_mode = 1
+autostart = true
 
-[node name="pre_round_wait_timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
-[node name="round_timer" type="Timer" parent="."]
-one_shot = true
+[node name="level_timer" type="Timer" parent="."]
+autostart = true
 
 [node name="wall" type="StaticBody2D" parent="."]
 position = Vector2(2173, 1047)
@@ -40,5 +37,3 @@ polygon = PackedVector2Array(-1.73193, -0.999939, 34.275, 18.6342, 105.691, 52.9
 [node name="hud" parent="." instance=ExtResource("4_otyp2")]
 
 [connection signal="timeout" from="spawn_enemies" to="." method="_on_spawn_enemies_timeout"]
-[connection signal="timeout" from="pre_round_wait_timer" to="." method="_on_pre_round_wait_timer_timeout"]
-[connection signal="timeout" from="round_timer" to="." method="_on_round_timer_timeout"]

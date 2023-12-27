@@ -2,31 +2,39 @@ extends Node2D
 
 const EXPERIENCE_REDUCTION_FACTOR = 0.8
 
-var level_stats: LevelStats
+#TODO: Añadir más rondas
+var round_stats_by_rounds = [
+	RoundStats.new(),
+	RoundStats.new(float(20), float(10), float(300), float(500), float(1.7), float(5), float(2), float(0.8), int(35))
+]
+
+var round_stats:RoundStats
 
 var shooter_enemy_scene = preload("res://02_scenes/01_characters/shooter_enemy.tscn")
 var simple_enemy_scene = preload("res://02_scenes/01_characters/simple_enemy.tscn")
 var experience_scene = load("res://02_scenes/02_objects/experience.tscn")
 
+var round = 0
 var experience = 0
-# this variable is used to level up faster. it is the experience value
+var experience_factor = 10
+# this variable is used to round up faster. it is the experience value
 
 var debug_pressed = false
 
 func _ready():
 	initialize_igor()
 	initialize_level_stats()
-	set_up_timer()
+	set_up_timers()
    
 func _process(delta):
-	update_exp_progress_bar()
+	update_hud()
 	
 	#TODO: delete this: this is a debug feature
 	if !debug_pressed and Input.is_key_pressed(KEY_1):
 		$igor.process_upgrade(HealUpgrade.new())
 		debug_pressed = true
 	
-func _on_end_game():
+func _game_over():
 	#TODO
 	pass
 
@@ -40,31 +48,36 @@ func _spawn_exp(position):
 	add_child(experience_instance)
 	
 func _on_exp_collected():
-	experience += level_stats.experience_factor
+	experience += experience_factor
 	
 	if experience >= 100:
 		on_exp_level_reached()
 		experience = 0
-		level_stats.experience_factor *= EXPERIENCE_REDUCTION_FACTOR
-		print(level_stats.experience_factor)
+		experience_factor *= EXPERIENCE_REDUCTION_FACTOR
+		print(experience_factor)
 	print("experience: " + str(experience))
 
-func update_exp_progress_bar():
+func update_hud():
 	#TODO: probablemente aquí tendré que añadir los niveles máximos de experiencia del nivel
-	$hud.update_exp(experience) 
+	$hud.update_exp(experience)
+	if !$round_timer.is_stopped():
+		$hud.update_time(int($round_timer.time_left))
 
 func on_exp_level_reached():
 	pause_game()
 
 func initialize_igor():
 	$igor.position = Vector2(1080, 1080)
-	$igor.connect("end_game", _on_end_game)
+	$igor.connect("end_game", _game_over)
 	
 func initialize_level_stats():
-	level_stats = LevelStats.new()
+	round_stats = round_stats_by_rounds[round]
 	
-func set_up_timer():
-	$spawn_enemies.wait_time = level_stats.spawn_enemy_time
+func set_up_timers():
+	$spawn_enemies.wait_time = round_stats.spawn_enemy_time
+	$round_timer.wait_time = round_stats.round_time
+	$round_timer.start()
+	$spawn_enemies.start()
 
 func spawn_enemy():
 	var random_point = get_random_point()
@@ -73,10 +86,10 @@ func spawn_enemy():
 	
 	if should_spawn_shooter:
 		enemy_instance = shooter_enemy_scene.instantiate()
-		enemy_instance.initialize_shooter_enemy($igor, level_stats.shooter_enemy_health, level_stats.enemy_movement_speed, level_stats.enemy_melee_damage, level_stats.enemy_projectile_damage, level_stats.enemy_shooting_speed, level_stats.enemy_projectile_speed)
+		enemy_instance.initialize_shooter_enemy($igor, round_stats.shooter_enemy_health, round_stats.enemy_movement_speed, round_stats.enemy_melee_damage, round_stats.enemy_projectile_damage, round_stats.enemy_shooting_speed, round_stats.enemy_projectile_speed)
 	else:
 		enemy_instance = simple_enemy_scene.instantiate()
-		enemy_instance.initialize_simple_enemy($igor, level_stats.simple_enemy_health, level_stats.enemy_movement_speed, level_stats.enemy_melee_damage)
+		enemy_instance.initialize_simple_enemy($igor, round_stats.simple_enemy_health, round_stats.enemy_movement_speed, round_stats.enemy_melee_damage)
 	
 	if enemy_instance is SimpleEnemy:
 		enemy_instance.position = random_point
@@ -93,5 +106,34 @@ func get_random_point():
 	
 	return Vector2(x, y)
 
+func clear_round_enemies():
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		enemy.queue_free()
+
 func pause_game():
-	get_tree().paused = true
+	#get_tree().paused = true
+	pass
+	
+func next_round():
+	round += 1
+	
+	if round < round_stats_by_rounds.size():
+		round_stats = round_stats_by_rounds[round]
+		set_up_timers()
+	else:
+		win_game()
+	
+
+func win_game():
+	#TODO
+	print("Has acabado todas las rondas")
+	pass
+
+func _on_round_timer_timeout():
+	$spawn_enemies.stop()
+	clear_round_enemies()
+	$pre_round_wait_timer.start()
+
+func _on_pre_round_wait_timer_timeout():
+	next_round()
+	
