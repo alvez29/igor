@@ -7,7 +7,8 @@ const LEVEL_LIMIT = 2160
 var state
 var anim
 var new_anim
-var can_shoot = true
+#var can_shoot = true
+var can_shoot = false
 
 var stats:PlayerStats
 

@@ -57,6 +57,8 @@ bg_color = Color(0.992157, 0, 0, 1)
 z_index = 2
 collision_mask = 26
 motion_mode = 1
+platform_on_leave = 1
+platform_floor_layers = 4294967040
 script = ExtResource("1_aevrl")
 metadata/_edit_vertical_guides_ = [1080.0, 1083.0]
 
