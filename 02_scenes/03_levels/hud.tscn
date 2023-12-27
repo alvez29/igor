@@ -39,3 +39,33 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 60
 text = "0:00"
+
+[node name="upgrades_container" type="HBoxContainer" parent="hud_control"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="first_upgrade" type="Button" parent="hud_control/upgrades_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "First Upgrade"
+
+[node name="second_upgrade" type="Button" parent="hud_control/upgrades_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Second Upgrade"
+
+[node name="third_upgrade" type="Button" parent="hud_control/upgrades_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Third Upgrade"
+
+[connection signal="pressed" from="hud_control/upgrades_container/first_upgrade" to="." method="_on_first_upgrade_pressed"]
+[connection signal="pressed" from="hud_control/upgrades_container/second_upgrade" to="." method="_on_second_upgrade_pressed"]
+[connection signal="pressed" from="hud_control/upgrades_container/third_upgrade" to="." method="_on_third_upgrade_pressed"]

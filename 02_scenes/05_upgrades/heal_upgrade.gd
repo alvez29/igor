@@ -1,7 +1,9 @@
 class_name HealUpgrade extends Upgrade
 
+func _init(name = "Heal", description = "Heal 25% of your Max Health"):
+	self.name = name
+	self.description = description
+
 func apply(stats:PlayerStats):
-	var stats_copy = stats
-	stats_copy.health += stats_copy.max_health * 0.25
-	
-	return stats_copy
+	if stats.health < stats.max_health:
+		stats.health += stats.max_health * 0.25

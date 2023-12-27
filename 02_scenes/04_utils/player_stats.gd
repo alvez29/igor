@@ -9,7 +9,7 @@ var damage:float
 var health:float
 var max_health:float
 
-func _init(friction = float(1000), accel = float(2000), movement_speed = float(700), shooting_speed = float(0.4), projectile_speed = float(700), damage = float(10), health = float(100), max_health = float(100)):
+func _init(friction = float(500), accel = float(2000), movement_speed = float(700), shooting_speed = float(0.4), projectile_speed = float(700), damage = float(10), health = float(100), max_health = float(100)):
 	self.friction = friction
 	self.accel = accel
 	self.movement_speed = movement_speed

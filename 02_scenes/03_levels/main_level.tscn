@@ -8,37 +8,40 @@
 [node name="main_level" type="Node2D"]
 script = ExtResource("1_prhoq")
 
-[node name="background" type="Sprite2D" parent="."]
+[node name="game" type="Node2D" parent="."]
+
+[node name="background" type="Sprite2D" parent="game"]
 position = Vector2(1080, 1080)
 texture = ExtResource("2_rr446")
 
-[node name="igor" parent="." instance=ExtResource("4_pjrcx")]
+[node name="igor" parent="game" instance=ExtResource("4_pjrcx")]
 position = Vector2(1082, 1075)
 metadata/_edit_vertical_guides_ = [1080.0, 1083.0, 64.0, -81.0, 82.0]
 metadata/_edit_horizontal_guides_ = [-187.0]
 
-[node name="spawn_enemies" type="Timer" parent="."]
+[node name="spawn_enemies" type="Timer" parent="game"]
 process_mode = 1
 
-[node name="pre_round_wait_timer" type="Timer" parent="."]
+[node name="pre_round_wait_timer" type="Timer" parent="game"]
 wait_time = 3.0
 one_shot = true
 
-[node name="round_timer" type="Timer" parent="."]
+[node name="round_timer" type="Timer" parent="game"]
 one_shot = true
 
-[node name="wall" type="StaticBody2D" parent="."]
+[node name="wall" type="StaticBody2D" parent="game"]
 position = Vector2(2173, 1047)
 rotation = 3.14159
 collision_layer = 8
 
-[node name="wall_collision" type="CollisionPolygon2D" parent="wall"]
+[node name="wall_collision" type="CollisionPolygon2D" parent="game/wall"]
 position = Vector2(1093, 1048)
 rotation = -0.523598
 polygon = PackedVector2Array(-1.73193, -0.999939, 34.275, 18.6342, 105.691, 52.9383, 204.623, 91.5822, 341.403, 126.674, 438.345, 138.765, 549.581, 144.098, 656.158, 137.503, 761.038, 121.846, 840.633, 101.983, 930.327, 70.6292, 1013.59, 34.4097, 1087.2, -5.07782, 1173.9, -61.2518, 1228.92, -104.543, 1289.43, -157.361, 1348.76, -220.107, 1397.51, -278.559, 1425.34, -316.762, 1462.81, -373.651, 1488.31, -417.818, 1507.58, -455.191, 1525.11, -493.564, 1545.55, -542.964, 1562.36, -584.069, 1582.5, -650.958, 1594.24, -697.296, 1605.42, -756.659, 1617.34, -843.307, 1620.46, -902.706, 1619.61, -963.24, 1617.17, -1027.01, 1609.63, -1087.94, 1599.85, -1149.01, 1584.51, -1214.44, 1567.41, -1272.82, 1548.17, -1325.49, 1523.87, -1383.4, 1497.93, -1436.48, 1464.34, -1496.29, 1422.45, -1559.74, 1379.29, -1616.99, 1328.57, -1675.14, 1276.58, -1727.09, 1208.37, -1784.95, 1154.35, -1825.38, 1107.35, -1855.98, 1058.86, -1883.98, 983.61, -1921.65, 918.855, -1947.49, 830.547, -1976.53, 743.068, -1997.02, 644.894, -2010.97, 540.354, -2015.91, 461.33, -2013.03, 387.869, -2005.79, 318.603, -1993.82, 237.142, -1972.73, 165.34, -1948.36, 94.6369, -1919.9, 29.9957, -1887.94, -31.3152, -1851.75, -96.1262, -1809.49, -155.875, -1762.01, -213.16, -1710.79, -265.883, -1653.47, -309.275, -1602.31, -356.704, -1536.16, -369.802, -1519.48, -415.802, -1439.8, -443.972, -1381.01, -478.214, -1295.7, -498.224, -1231.04, -517.538, -1155.59, -529.887, -1084.2, -536.809, -1006.22, -539.266, -927.959, -536.821, -864.194, -531.279, -799.795, -521.87, -740.091, -506.801, -670.192, -482.108, -588.963, -456.611, -521.125, -431.31, -464.948, -402.41, -409.003, -372.243, -359.254, -329.488, -295.309, -286.196, -240.293, -236.575, -186.24, -186.185, -137.517, -131.198, -90.7587, -72.8439, -47.8303, -38.4709, -23.3661, -1.73193, -0.999939, -24.0001, 41.5692, -1006.32, -581.004, 123.724, -2546.28, 2099.02, -1381.59, 985.195, 589.592, -24.0001, 41.5692)
 
 [node name="hud" parent="." instance=ExtResource("4_otyp2")]
 
-[connection signal="timeout" from="spawn_enemies" to="." method="_on_spawn_enemies_timeout"]
-[connection signal="timeout" from="pre_round_wait_timer" to="." method="_on_pre_round_wait_timer_timeout"]
-[connection signal="timeout" from="round_timer" to="." method="_on_round_timer_timeout"]
+[connection signal="timeout" from="game/spawn_enemies" to="." method="_on_spawn_enemies_timeout"]
+[connection signal="timeout" from="game/pre_round_wait_timer" to="." method="_on_pre_round_wait_timer_timeout"]
+[connection signal="timeout" from="game/round_timer" to="." method="_on_round_timer_timeout"]
+[connection signal="upgrade_selected" from="hud" to="." method="_on_hud_upgrade_selected"]

@@ -24,8 +24,7 @@ func _ready():
 	update_health_bar()
 
 func _physics_process(delta):
-	#process_input(delta)
-	process_input_test(delta)
+	process_input(delta)
 	move_and_slide()
 	process_animation()
 	update_health_bar()
@@ -75,8 +74,6 @@ func on_dead():
 	pass
 	
 # region process functions
-
-func process_input(delta):
 	var up = Input.is_action_pressed("up")
 	var right = Input.is_action_pressed("right")
 	var left = Input.is_action_pressed("left")
@@ -98,7 +95,7 @@ func process_input(delta):
 		velocity.x = stats.movement_speed
 		change_state(RUN)
 
-func process_input_test(delta):
+func process_input(delta):
 	var input = Vector2.ZERO
 	
 	input.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
@@ -144,7 +141,7 @@ func take_damage(damage):
 # region auxiliar functions
 
 func process_upgrade(upgrade:Upgrade):
-	stats = upgrade.apply(stats)
+	upgrade.apply(stats)
 
 func find_closest_enemy():
 	var enemies = get_tree().get_nodes_in_group("enemy")
