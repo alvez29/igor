@@ -8,11 +8,14 @@ var first_upgrade:Upgrade
 var second_upgrade:Upgrade
 var third_upgrade:Upgrade
 
+func _on_ready():
+	$game_over_control.hide()
+
 func fade_time_out():
-	$hud_control/animation.play("fade_out")
+	$animation.play("fade_out")
 	
 func fade_time_in():
-	$hud_control/animation.play("fade_in")
+	$animation.play("fade_in")
 
 func update_exp(exp_value):
 	$hud_control/exp_bar.value = exp_value
@@ -42,6 +45,9 @@ func show_random_stats_upgrades():
 	
 	$hud_control/upgrades_container.show()
 
+func show_game_over_layout():
+	
+	$animation.play("game_over_animation")
 
 func _on_first_upgrade_pressed():
 	$hud_control/upgrades_container.hide()
@@ -54,3 +60,9 @@ func _on_second_upgrade_pressed():
 func _on_third_upgrade_pressed():
 	$hud_control/upgrades_container.hide()
 	emit_signal("upgrade_selected", third_upgrade)
+
+func _on_restart_button_pressed():
+	get_tree().reload_current_scene()
+
+func _on_quit_button_pressed():
+	get_tree().quit()

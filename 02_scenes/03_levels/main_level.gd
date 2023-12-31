@@ -2,7 +2,6 @@ extends Node2D
 
 const EXPERIENCE_REDUCTION_FACTOR = 0.8
 
-#TODO: Añadir más rondas y equilibrar
 var round_stats_by_rounds = [
 	RoundStats.createRoundOneStats(),
 	RoundStats.createRoundTwoStats(),
@@ -31,8 +30,12 @@ func _process(delta):
 	update_hud()
 
 func _game_over():
-	#TODO
-	pass
+	clear_hostile_objects()
+	$hud.show_game_over_layout()
+	$igor.set_process(false)
+	$igor.hide()
+	$spawn_enemies.stop()
+	$round_timer.stop()
 
 func _on_spawn_enemies_timeout():
 	spawn_enemy()
@@ -102,11 +105,17 @@ func get_random_point():
 	
 	return Vector2(x, y)
 
-func clear_round_enemies():
+func clear_hostile_objects():
+	clear_enemies()
+	clear_enemy_projectiles()
+
+func clear_enemies():
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.queue_free()
+		
+func clear_enemy_projectiles():
 	for projectile in get_tree().get_nodes_in_group("enemy_projectile"):
-		projectile.queue_free()
+			projectile.queue_free()
 
 func pause_game():
 	get_tree().paused = true
@@ -130,7 +139,7 @@ func win_game():
 func _on_round_timer_timeout():
 	$hud.fade_time_out()
 	$spawn_enemies.stop()
-	clear_round_enemies()
+	clear_hostile_objects()
 	$pre_round_wait_timer.start()
 
 func _on_pre_round_wait_timer_timeout():
