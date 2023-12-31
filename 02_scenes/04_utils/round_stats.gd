@@ -133,7 +133,7 @@ static func createRoundFiveStats():
 		#enemy_projectile_speed
 		float(700),
 		#enemy_shooting_speed
-		float(1.3),
+		float(2),
 		#enemy_projectile_damage
 		float(10),
 		#enemy_melee_damage
