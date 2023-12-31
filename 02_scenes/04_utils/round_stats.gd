@@ -41,19 +41,19 @@ static func createRoundOneStats():
 		#shooter_enemy_health
 		float(5),
 		#enemy_movement_speed
-		float(200),
+		float(180),
 		#enemy_projectile_speed
 		float(350),
 		#enemy_shooting_speed
-		float(2),
+		float(3),
 		#enemy_projectile_damage
 		float(5),
 		#enemy_melee_damage
 		float(2),
 		#spawn_enemy_time
-		float(0.6),
+		float(0.5),
 		#round_time
-		int(20),
+		int(10),
 	)
 	
 static func createRoundTwoStats():
@@ -63,19 +63,19 @@ static func createRoundTwoStats():
 		#shooter_enemy_health
 		float(10),
 		#enemy_movement_speed
-		float(300),
+		float(200),
 		#enemy_projectile_speed
 		float(500),
 		#enemy_shooting_speed
-		float(1.7),
+		float(2.5),
 		#enemy_projectile_damage
 		float(5),
 		#enemy_melee_damage
 		float(2),
 		#spawn_enemy_time
-		float(0.6),
+		float(0.4),
 		#round_time
-		int(20),
+		int(15),
 	)
 
 static func createRoundThreeStats():
@@ -89,14 +89,57 @@ static func createRoundThreeStats():
 		#enemy_projectile_speed
 		float(600),
 		#enemy_shooting_speed
+		float(2.25),
+		#enemy_projectile_damage
+		float(10),
+		#enemy_melee_damage
+		float(5),
+		#spawn_enemy_time
+		float(0.3),
+		#round_time
+		int(20),
+	)
+	
+static func createRoundFourStats():
+	return RoundStats.new(
+		#simple_enemy_health
+		float(30),
+		#shooter_enemy_health
+		float(20),
+		#enemy_movement_speed
+		float(500),
+		#enemy_projectile_speed
+		float(600),
+		#enemy_shooting_speed
+		float(2),
+		#enemy_projectile_damage
+		float(10),
+		#enemy_melee_damage
+		float(5),
+		#spawn_enemy_time
+		float(0.25),
+		#round_time
+		int(25),
+	)
+
+static func createRoundFiveStats():
+	return RoundStats.new(
+		#simple_enemy_health
+		float(50),
+		#shooter_enemy_health
+		float(30),
+		#enemy_movement_speed
+		float(600),
+		#enemy_projectile_speed
+		float(700),
+		#enemy_shooting_speed
 		float(1.3),
 		#enemy_projectile_damage
 		float(10),
 		#enemy_melee_damage
 		float(5),
 		#spawn_enemy_time
-		float(0.4),
+		float(0.2),
 		#round_time
-		int(35),
+		int(25),
 	)
-	

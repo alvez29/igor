@@ -6,7 +6,9 @@ const EXPERIENCE_REDUCTION_FACTOR = 0.8
 var round_stats_by_rounds = [
 	RoundStats.createRoundOneStats(),
 	RoundStats.createRoundTwoStats(),
-	RoundStats.createRoundThreeStats()
+	RoundStats.createRoundThreeStats(),
+	RoundStats.createRoundFourStats(),
+	RoundStats.createRoundFiveStats()
 ]
 
 var round_stats:RoundStats
@@ -18,7 +20,7 @@ var experience_scene = preload("res://02_scenes/02_objects/experience.tscn")
 var round = 0
 var experience = 0
 # this variable is used to round up faster. it is the experience value
-var experience_factor = 15
+var experience_factor = 17
 
 func _ready():
 	initialize_igor()
@@ -135,6 +137,6 @@ func _on_pre_round_wait_timer_timeout():
 func _on_hud_upgrade_selected(upgrade):
 	get_tree().paused = false
 	if upgrade is LearnFasterUpgrade:
-		experience_factor *= 1.1
+		experience_factor *= 1.75
 	else:
 		$igor.process_upgrade(upgrade)

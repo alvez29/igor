@@ -46,7 +46,7 @@ _data = {
 radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n7eqp"]
-radius = 208.06
+radius = 471.344
 
 [node name="experience" type="RigidBody2D" groups=["experience"]]
 collision_layer = 32

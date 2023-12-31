@@ -12,7 +12,19 @@ var player_scale:float
 var projectile_scale:float
 var experience_factor:float
 
-func _init(friction = float(500), accel = float(2000), movement_speed = float(700), shooting_speed = float(0.4), projectile_speed = float(700), damage = float(10), health = float(100), max_health = float(100), player_scale = float(1), projectile_scale = float(1), experience_factor = float(4)):
+func _init(
+	friction = float(700),
+	accel = float(2000), 
+	movement_speed = float(700), 
+	shooting_speed = float(0.5), 
+	projectile_speed = float(700), 
+	damage = float(10), 
+	health = float(150), 
+	max_health = float(150), 
+	player_scale = float(1), 
+	projectile_scale = float(1), 
+	experience_factor = float(4)
+	):
 	self.friction = friction
 	self.accel = accel
 	self.movement_speed = movement_speed
