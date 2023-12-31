@@ -7,6 +7,7 @@ var availabe_stats_upgrades:Array = [
 	ReduceFrictionUpgrade.new(),
 	MoreDamageUpgrade.new(),
 	ShootFasterUpgrade.new(),
+	LearnFasterUpgrade.new(),
 ]
 
 func get_random_stat_upgrade():

@@ -135,4 +135,7 @@ func _on_pre_round_wait_timer_timeout():
 
 func _on_hud_upgrade_selected(upgrade):
 	get_tree().paused = false
-	$igor.process_upgrade(upgrade)
+	if upgrade is LearnFasterUpgrade:
+		experience_factor *= 1.1
+	else:
+		$igor.process_upgrade(upgrade)
