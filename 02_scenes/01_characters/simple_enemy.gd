@@ -56,7 +56,7 @@ func follow_igor(_delta):
 		# even so, this is just a workaround preventing the implementation of a 
 		# simulated pushing system in CharacterBody
 		# CharacterBody let me get the movement I want but, since enemy is a CharacterBody and not a RigidBody,
-		# player can't push enemies which is a mechanic that would immprove the player movement considerably
+		# player can't push enemies through pyhsics motor which is a mechanic that would immprove the player movement considerably
 		
 		if player_distance_value <= 92:
 			velocity = Vector2(0, 0)
