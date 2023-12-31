@@ -42,6 +42,7 @@ func show_random_stats_upgrades():
 	
 	$hud_control/upgrades_container.show()
 
+
 func _on_first_upgrade_pressed():
 	$hud_control/upgrades_container.hide()
 	emit_signal("upgrade_selected", first_upgrade)

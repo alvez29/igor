@@ -1,4 +1,3 @@
-# TODO: Tendré que hacer un RigidBody si quiero hacer que choque y el jugador lo empuje 
 class_name SimpleEnemy extends CharacterBody2D
 
 enum {RUN, HURT, DEAD}

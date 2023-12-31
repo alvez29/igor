@@ -13,7 +13,7 @@ var round_stats:RoundStats
 
 var shooter_enemy_scene = preload("res://02_scenes/01_characters/shooter_enemy.tscn")
 var simple_enemy_scene = preload("res://02_scenes/01_characters/simple_enemy.tscn")
-var experience_scene = load("res://02_scenes/02_objects/experience.tscn")
+var experience_scene = preload("res://02_scenes/02_objects/experience.tscn")
 
 var round = 0
 var experience = 0
@@ -120,9 +120,8 @@ func next_round():
 	
 
 func win_game():
-	#TODO
-	print("Has acabado todas las rondas")
-	pass
+	$igor.set_process(false)
+	get_tree().change_scene_to_file("res://02_scenes/03_levels/win_game.tscn")
 
 func _on_round_timer_timeout():
 	$hud.fade_time_out()
