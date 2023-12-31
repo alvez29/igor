@@ -43,7 +43,7 @@ static func createRoundOneStats():
 		#enemy_movement_speed
 		float(200),
 		#enemy_projectile_speed
-		float(250),
+		float(350),
 		#enemy_shooting_speed
 		float(2),
 		#enemy_projectile_damage

@@ -100,5 +100,6 @@ show_percentage = false
 
 [connection signal="area_entered" from="hit_area" to="." method="_on_hit_area_area_entered"]
 [connection signal="area_exited" from="hit_area" to="." method="_on_hit_area_area_exited"]
+[connection signal="body_entered" from="hit_area" to="." method="_on_hit_area_body_entered"]
 [connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="enemy_damage_timer" to="." method="_on_damage_timer_timeout"]

@@ -119,7 +119,7 @@ func shoot():
 
 	if closest_enemy != null:
 		projectile_instance.position = position
-		projectile_instance.initialize_to_closest_enemy(closest_enemy, stats.projectile_speed, stats.damage)
+		projectile_instance.initialize_to_closest_enemy(closest_enemy, stats.projectile_speed, stats.damage, stats.projectile_scale)
 		stage_node.add_child(projectile_instance)
 		can_shoot = false
 	
@@ -142,6 +142,7 @@ func take_damage(damage):
 
 func process_upgrade(upgrade:Upgrade):
 	upgrade.apply(stats)
+	self.scale = Vector2(stats.player_scale, stats.player_scale)
 
 func find_closest_enemy():
 	var enemies = get_tree().get_nodes_in_group("enemy")

@@ -8,4 +8,4 @@ func _init(name = "Shoot faster", description = "Increase your shooting speed an
 func apply(stats:PlayerStats):
 	stats.shooting_speed *= 0.75
 	stats.projectile_speed *= 1.5
-	stats.damage *= 0.5
+	stats.damage *= 0.75
