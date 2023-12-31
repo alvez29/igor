@@ -36,7 +36,6 @@ func change_state(new_state):
 			$hurt_animation_timer.start()
 		DEAD:
 			on_dead()
-	
 
 func on_dead():
 	call_deferred("emit_spawn_exp")
@@ -48,8 +47,22 @@ func emit_spawn_exp():
 func follow_igor(_delta):
 	if player_reference != null:
 		var player_position = player_reference.position
-		var direction_vector = (player_position - position).normalized()
-		velocity =  direction_vector * movement_speed
+		var player_distance = player_position - position
+		var direction_vector = player_distance.normalized()
+		var player_distance_value = abs(player_distance.length())
+		
+		# this make player movement a bit more satisfactory since enemy 
+		# will stop if its close enough to the player
+		# even so, this is just a workaround preventing the implementation of a 
+		# simulated pushing system in CharacterBody
+		# CharacterBody let me get the movement I want but, since enemy is a CharacterBody and not a RigidBody,
+		# player can't push enemies which is a mechanic that would immprove the player movement considerably
+		
+		if player_distance_value <= 92:
+			velocity = Vector2(0, 0)
+		else:
+			velocity =  direction_vector * movement_speed
+		
 	move_and_slide()
 
 func process_animation():

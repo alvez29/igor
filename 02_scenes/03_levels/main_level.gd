@@ -105,6 +105,8 @@ func get_random_point():
 func clear_round_enemies():
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.queue_free()
+	for projectile in get_tree().get_nodes_in_group("enemy_projectile"):
+		projectile.queue_free()
 
 func pause_game():
 	get_tree().paused = true

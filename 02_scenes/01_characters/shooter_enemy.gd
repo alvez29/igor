@@ -12,10 +12,9 @@ func _ready():
 	set_up_timer()
 
 func _physics_process(delta):
-	follow_igor(delta)
+	super._physics_process(delta)
 	if can_shoot:
 		shoot()
-	process_animation()
 	
 func _on_reload_timer_timeout():
 	can_shoot = true
