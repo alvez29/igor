@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://1v6jarbl7x2o"]
+[gd_scene load_steps=7 format=3 uid="uid://1v6jarbl7x2o"]
 
 [ext_resource type="Script" path="res://02_scenes/06_screens/win_game.gd" id="1_3lu1t"]
+[ext_resource type="FontFile" uid="uid://des5ixft34wbv" path="res://01_assets/03_fonts/PalanquinDark-Medium.ttf" id="2_iiotn"]
 [ext_resource type="AudioStream" uid="uid://bt1e25qb6tcvd" path="res://01_assets/02_sounds/win.wav" id="2_qk0te"]
 
 [sub_resource type="Animation" id="Animation_3ft11"]
@@ -52,34 +53,40 @@ script = ExtResource("1_3lu1t")
 
 [node name="you win" type="Label" parent="."]
 layout_mode = 2
-offset_left = 333.0
-offset_top = 436.0
-offset_right = 747.0
-offset_bottom = 560.0
+offset_left = 125.0
+offset_top = 231.0
+offset_right = 994.0
+offset_bottom = 594.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.261799
-pivot_offset = Vector2(199, 59)
-theme_override_font_sizes/font_size = 90
+pivot_offset = Vector2(412.103, 181.5)
+theme_override_fonts/font = ExtResource("2_iiotn")
+theme_override_font_sizes/font_size = 200
 text = "you win!!!"
 horizontal_alignment = 1
 
 [node name="horizontal_container" type="HBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 333.0
-offset_top = 699.0
-offset_right = 747.0
-offset_bottom = 743.0
+offset_left = 206.0
+offset_top = 741.0
+offset_right = 879.0
+offset_bottom = 822.0
+pivot_offset = Vector2(334, 41)
 alignment = 1
 
 [node name="restart_button" type="Button" parent="horizontal_container"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_iiotn")
+theme_override_font_sizes/font_size = 40
 text = "restart game"
 
 [node name="quit_button" type="Button" parent="horizontal_container"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_iiotn")
+theme_override_font_sizes/font_size = 40
 text = "quit game"
 
 [node name="animation" type="AnimationPlayer" parent="."]

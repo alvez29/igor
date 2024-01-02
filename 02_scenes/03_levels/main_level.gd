@@ -162,7 +162,7 @@ func _on_hud_upgrade_selected(upgrade):
 	$upgrade_selected_audio_player.play()
 	get_tree().paused = false
 	if upgrade is LearnFasterUpgrade:
-		experience_factor *= 1.75
+		experience_factor *= 1.6
 	else:
 		$igor.process_upgrade(upgrade)
 

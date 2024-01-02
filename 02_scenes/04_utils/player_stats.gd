@@ -19,8 +19,8 @@ func _init(
 	shooting_speed = float(0.5), 
 	projectile_speed = float(700), 
 	damage = float(10), 
-	health = float(150), 
-	max_health = float(150), 
+	health = float(125), 
+	max_health = float(125), 
 	player_scale = float(1), 
 	projectile_scale = float(1), 
 	experience_factor = float(4)

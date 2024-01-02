@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvkylixps6pbr"]
+
+[ext_resource type="Script" path="res://02_scenes/06_screens/how_to_play.gd" id="1_o1x7e"]
+[ext_resource type="FontFile" uid="uid://des5ixft34wbv" path="res://01_assets/03_fonts/PalanquinDark-Medium.ttf" id="1_odjf4"]
+[ext_resource type="Texture2D" uid="uid://6oylhfbaa300" path="res://01_assets/01_sprites/controls.png" id="2_dop3w"]
+
+[node name="how_to_play" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o1x7e")
+
+[node name="instructions" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -391.0
+offset_top = -540.0
+offset_right = 378.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_odjf4")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]
+[color=#d35f5f]igor[/color] has to save his species from an evil force
+
+survive 5 rounds dodging [color=#794bff]enemies[/color] and [color=#05ff02]bullets[/color] leveling up
+ 
+enemies will drop [color=#ffed32]experience[/color] that will help you to reach higher level
+
+once you level up you can choose between 3 random upgrades that will help you to last longer
+[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="ready" type="Button" parent="."]
+layout_mode = 0
+offset_left = 347.0
+offset_top = 902.0
+offset_right = 715.0
+offset_bottom = 980.0
+pivot_offset = Vector2(184, 36)
+theme_override_fonts/font = ExtResource("1_odjf4")
+theme_override_font_sizes/font_size = 38
+text = "i'm ready"
+
+[node name="control_container" type="Control" parent="."]
+anchors_preset = 0
+offset_top = -138.0
+offset_right = 40.0
+offset_bottom = -98.0
+
+[node name="inputs_label" type="Label" parent="control_container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 287.0
+offset_top = 545.5
+offset_right = 764.0
+offset_bottom = 952.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_odjf4")
+theme_override_font_sizes/font_size = 43
+text = "you can move with
+
+
+
+and shoot automatically"
+horizontal_alignment = 1
+
+[node name="controls" type="Sprite2D" parent="control_container"]
+position = Vector2(543, 773)
+scale = Vector2(0.896512, 0.896512)
+texture = ExtResource("2_dop3w")
+
+[connection signal="pressed" from="ready" to="." method="_on_ready_pressed"]

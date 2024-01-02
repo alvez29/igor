@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxq1vfr86sk5m"]
+[gd_scene load_steps=11 format=3 uid="uid://dxq1vfr86sk5m"]
 
 [ext_resource type="Script" path="res://02_scenes/06_screens/hud.gd" id="1_da1df"]
 [ext_resource type="AudioStream" uid="uid://cr5mklyfo3mjp" path="res://01_assets/02_sounds/elevator_music.wav" id="2_swqm5"]
 [ext_resource type="AudioStream" uid="uid://b2lc1ustpuuyh" path="res://01_assets/02_sounds/game_over.wav" id="3_4bnv3"]
+[ext_resource type="FontFile" uid="uid://des5ixft34wbv" path="res://01_assets/03_fonts/PalanquinDark-Medium.ttf" id="4_uxjpo"]
 
 [sub_resource type="Animation" id="Animation_v3wbn"]
 length = 0.001
@@ -199,6 +200,7 @@ grow_vertical = 0
 [node name="time_left" type="Label" parent="hud_control/round_stats_container"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_uxjpo")
 theme_override_font_sizes/font_size = 60
 text = "0:00"
 horizontal_alignment = 1
@@ -207,6 +209,7 @@ vertical_alignment = 1
 [node name="round" type="Label" parent="hud_control/round_stats_container"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_uxjpo")
 theme_override_font_sizes/font_size = 40
 text = "round 1"
 horizontal_alignment = 1
@@ -228,6 +231,7 @@ alignment = 1
 
 [node name="level_reached" type="Label" parent="hud_control/upgrades_container"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_uxjpo")
 theme_override_font_sizes/font_size = 60
 text = "level reached!
 please select an upgrade"
@@ -241,16 +245,22 @@ layout_mode = 2
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_uxjpo")
 text = "First Upgrade"
 
 [node name="second_upgrade" type="Button" parent="hud_control/upgrades_container/horizontal_container"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_uxjpo")
 text = "Second Upgrade"
 
 [node name="third_upgrade" type="Button" parent="hud_control/upgrades_container/horizontal_container"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_uxjpo")
 text = "Third Upgrade"
 
 [node name="game_over_control" type="Control" parent="."]
@@ -283,9 +293,9 @@ offset_right = 41.0
 offset_bottom = 37.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_uxjpo")
 theme_override_font_sizes/font_size = 90
-text = "you were defeated
-:("
+text = "you were defeated :("
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -300,11 +310,13 @@ alignment = 1
 [node name="restart_button" type="Button" parent="game_over_control/horizontal_container"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_uxjpo")
 text = "restart game"
 
 [node name="quit_button" type="Button" parent="game_over_control/horizontal_container"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_uxjpo")
 text = "quit game"
 
 [connection signal="ready" from="." to="." method="_on_ready"]
