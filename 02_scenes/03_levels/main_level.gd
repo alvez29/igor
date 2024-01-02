@@ -31,7 +31,9 @@ func _process(delta):
 
 func _game_over():
 	clear_hostile_objects()
+	clear_exp()
 	$hud.show_game_over_layout()
+	$igor.set_process_input(false)
 	$igor.set_process(false)
 	$igor.hide()
 	$spawn_enemies.stop()
@@ -45,8 +47,14 @@ func _spawn_exp(position):
 	experience_instance.position = position
 	experience_instance.connect("on_exp_collected", _on_exp_collected) 
 	add_child(experience_instance)
+
+func _on_enemy_hit(position):
+	$enemy_hit_audio_player.pitch_scale = randf_range(0.6, 1.5)
+	$enemy_hit_audio_player.position = position
+	$enemy_hit_audio_player.play()
 	
 func _on_exp_collected():
+	$experience_audio_player.play()
 	experience += experience_factor
 	
 	if experience >= 100:
@@ -62,6 +70,7 @@ func update_hud():
 		$hud.update_time(int($round_timer.time_left))
 
 func on_exp_level_reached():
+	$level_up_audio_player.play()
 	$hud.show_random_stats_upgrades()
 	pause_game()
 
@@ -92,6 +101,7 @@ func spawn_enemy():
 	
 	if enemy_instance is SimpleEnemy:
 		enemy_instance.position = random_point
+		enemy_instance.connect("enemy_hit", _on_enemy_hit)
 		enemy_instance.connect("spawn_exp", _spawn_exp)
 		add_child(enemy_instance)
 
@@ -109,6 +119,10 @@ func clear_hostile_objects():
 	clear_enemies()
 	clear_enemy_projectiles()
 
+func clear_exp():
+	for enemy in get_tree().get_nodes_in_group("experience"):
+		enemy.queue_free()
+
 func clear_enemies():
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.queue_free()
@@ -119,10 +133,10 @@ func clear_enemy_projectiles():
 
 func pause_game():
 	get_tree().paused = true
-	
+
 func next_round():
 	round += 1
-	
+
 	if round < round_stats_by_rounds.size():
 		round_stats = round_stats_by_rounds[round]
 		$hud.update_round(round)
@@ -130,11 +144,10 @@ func next_round():
 		$hud.fade_time_in()
 	else:
 		win_game()
-	
 
 func win_game():
 	$igor.set_process(false)
-	get_tree().change_scene_to_file("res://02_scenes/03_levels/win_game.tscn")
+	get_tree().change_scene_to_file("res://02_scenes/06_screens/win_game.tscn")
 
 func _on_round_timer_timeout():
 	$hud.fade_time_out()
@@ -143,11 +156,15 @@ func _on_round_timer_timeout():
 	$pre_round_wait_timer.start()
 
 func _on_pre_round_wait_timer_timeout():
-	next_round()
+	$next_round_audio_player.play()
 
 func _on_hud_upgrade_selected(upgrade):
+	$upgrade_selected_audio_player.play()
 	get_tree().paused = false
 	if upgrade is LearnFasterUpgrade:
 		experience_factor *= 1.75
 	else:
 		$igor.process_upgrade(upgrade)
+
+func _on_next_round_audio_player_finished():
+	next_round()

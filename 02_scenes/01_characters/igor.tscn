@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cn0mc11h82aqa"]
+[gd_scene load_steps=11 format=3 uid="uid://cn0mc11h82aqa"]
 
 [ext_resource type="Script" path="res://02_scenes/01_characters/igor.gd" id="1_aevrl"]
 [ext_resource type="Texture2D" uid="uid://c4ry2n6xl5yrc" path="res://01_assets/01_sprites/igor_animation.png" id="2_7jn6h"]
 [ext_resource type="Script" path="res://02_scenes/02_objects/enemy_damage_timer.gd" id="3_dvtra"]
+[ext_resource type="AudioStream" uid="uid://621eydvr8yn3" path="res://01_assets/02_sounds/shoot.wav" id="4_djwy8"]
 
 [sub_resource type="Animation" id="Animation_tmvrw"]
 length = 0.9
@@ -99,6 +100,11 @@ offset_bottom = -45.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_wyyho")
 value = 100.0
 show_percentage = false
+
+[node name="shoot_audio_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_djwy8")
+volume_db = -20.0
+max_polyphony = 15
 
 [connection signal="area_entered" from="hit_area" to="." method="_on_hit_area_area_entered"]
 [connection signal="area_exited" from="hit_area" to="." method="_on_hit_area_area_exited"]

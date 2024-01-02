@@ -1,6 +1,6 @@
 class_name ShooterEnemy extends SimpleEnemy
 
-var can_shoot = true
+var can_shoot = false
 var shooting_speed
 var projectile_speed
 var projectile_damage

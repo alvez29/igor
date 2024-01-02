@@ -12,6 +12,7 @@ var health
 var damage
 
 signal spawn_exp
+signal enemy_hit
 
 func _ready():
 	change_state(RUN)
@@ -71,6 +72,7 @@ func process_animation():
 		$animation.play(anim)
 
 func take_damage(enemy_damage):
+	emit_signal("enemy_hit", self.position)
 	change_state(HURT)
 	health -= enemy_damage
 	if health <= 0:

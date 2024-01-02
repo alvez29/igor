@@ -112,7 +112,6 @@ func process_input(delta):
 		velocity = velocity.limit_length(stats.movement_speed)
 		
 func shoot():
-	# TODO: calcular el enemigo más cerca puede ser un problema con muchos enemigos
 	var closest_enemy = find_closest_enemy()
 	var stage_node = get_parent()
 	var projectile_instance = projectile_scene.instantiate()
@@ -121,6 +120,7 @@ func shoot():
 		projectile_instance.position = position
 		projectile_instance.initialize_to_closest_enemy(closest_enemy, stats.projectile_speed, stats.damage, stats.projectile_scale)
 		stage_node.add_child(projectile_instance)
+		$shoot_audio_player.play()
 		can_shoot = false
 	
 	$reload_timer.wait_time = stats.shooting_speed

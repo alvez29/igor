@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://7edvuoc7hxkm"]
 
 [ext_resource type="Script" path="res://02_scenes/02_objects/enemy_projectile.gd" id="1_gcpvr"]
-[ext_resource type="Texture2D" uid="uid://d3022qvyaosje" path="res://01_assets/01_sprites/rogi_proj_animation.png" id="2_hehhd"]
+[ext_resource type="Texture2D" uid="uid://bphpjv3xfc82n" path="res://01_assets/01_sprites/enemy_projectile_animation.png" id="2_qe0ik"]
 
 [sub_resource type="Animation" id="Animation_74ndq"]
 length = 0.001
@@ -53,7 +53,7 @@ gravity_scale = 0.0
 script = ExtResource("1_gcpvr")
 
 [node name="image" type="Sprite2D" parent="."]
-texture = ExtResource("2_hehhd")
+texture = ExtResource("2_qe0ik")
 hframes = 5
 
 [node name="animation" type="AnimationPlayer" parent="."]

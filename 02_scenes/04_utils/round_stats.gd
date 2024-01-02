@@ -125,9 +125,9 @@ static func createRoundFourStats():
 static func createRoundFiveStats():
 	return RoundStats.new(
 		#simple_enemy_health
-		float(50),
+		float(100),
 		#shooter_enemy_health
-		float(30),
+		float(80),
 		#enemy_movement_speed
 		float(600),
 		#enemy_projectile_speed
