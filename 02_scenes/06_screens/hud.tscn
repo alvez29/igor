@@ -201,10 +201,10 @@ grow_vertical = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_uxjpo")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 90
 text = "0:00"
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 2
 
 [node name="round" type="Label" parent="hud_control/round_stats_container"]
 layout_mode = 2
