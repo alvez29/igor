@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://02_scenes/06_screens/title_screen.gd" id="1_cxiny"]
 [ext_resource type="FontFile" uid="uid://des5ixft34wbv" path="res://01_assets/03_fonts/PalanquinDark-Medium.ttf" id="1_dmg85"]
-[ext_resource type="Texture2D" uid="uid://c4ry2n6xl5yrc" path="res://01_assets/01_sprites/igor_animation.png" id="1_xdbpq"]
 [ext_resource type="Texture2D" uid="uid://bvop5qetcj4ar" path="res://01_assets/01_sprites/backgroundff.png" id="2_vmvdb"]
+[ext_resource type="Texture2D" uid="uid://jjmw8m04w0cs" path="res://01_assets/01_sprites/title.png" id="4_57vgp"]
 
 [node name="title_screen" type="Control"]
 layout_mode = 3
@@ -47,10 +47,9 @@ theme_override_font_sizes/font_size = 500
 text = "ig   r"
 
 [node name="igor_img" type="Sprite2D" parent="title_container"]
-position = Vector2(661, 414)
-scale = Vector2(4.42188, 4.42188)
-texture = ExtResource("1_xdbpq")
-hframes = 3
+position = Vector2(663, 416)
+scale = Vector2(0.448825, 0.446891)
+texture = ExtResource("4_57vgp")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
