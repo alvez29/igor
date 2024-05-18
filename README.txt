@@ -1,7 +1,7 @@
 El juego consiste en sobrevivir 5 rondas. Puedes moverte con WASD,
 teclas direccionales y mando (preferible). El personaje dispara solo y al recoger experiencia subes tu nivel.
 
-Al subir de nivel debes seleccionar entre 3 mejoras aleatorias entre las siguientes:
+Al subir de nivel, el juego de pausará y deberás seleccionar entre 3 mejoras aleatorias entre las siguientes:
 
 - Learn Faster: subes de nivel más rápido
 - Get Healthier: aumenta tu vida máxima
